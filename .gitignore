@@ -1,0 +1,11 @@
+dist
+dist-newstyle/
+.dyn_hi
+*.dyn_o
+*.hi
+*.lock
+*.o
+.stack-work/
+.*.swp
+tags
+*.tix

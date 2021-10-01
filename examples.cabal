@@ -1,0 +1,26 @@
+cabal-version:      2.4
+name:               examples
+version:            0.1.0
+description:        Simple Haskell code examples and experiments.
+homepage:           https://gitlab.com/frankhjung1/haskell-examples/
+bug-reports:        https://gitlab.com/frankhjung1/haskell-examples/issues
+license:            GPL-3.0-only
+license-file:       LICENSE
+author:             Frank H Jung
+maintainer:         frankhjung@linux.com
+copyright:          GPL-3.0-only
+category:           education
+extra-source-files: README.md
+
+source-repository head
+  type:     git
+  location: https://gitlab.com/frankhjung1/haskell-examples/
+
+executable examples
+  main-is:          Main.hs
+  hs-source-dirs:   app
+  default-language: Haskell2010
+  ghc-options:      -Wall
+  build-depends:
+    , base   ^>=4.17.2.0
+    , hspec  ^>=2.11.7
