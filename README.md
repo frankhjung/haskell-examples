@@ -2,6 +2,14 @@
 
 A collection of code snippets and utilities.
 
+## Build
+
+Build using Cabal withL
+
+```bash
+cabal build
+```
+
 ## hlint
 
 Generate a report of hlint suggestions for a project.
@@ -17,6 +25,14 @@ hlint --default > .hlint.yaml
 ```
 
 ## Cabal Packages
+
+### Install Missing Package
+
+```bash
+cabal install --overwrite-policy=always --lib <package-name>
+```
+
+### Package Versions
 
 Tested locally using GHC 9.4.6 and Cabal 3.6.2.0 with these packages:
 
@@ -61,5 +77,5 @@ constraints: any.HUnit ==1.6.2.0,
              any.time ==1.12.2,
              any.transformers ==0.5.6.2,
              any.unix ==2.7.3
-index-state: hackage.haskell.org 2023-10-31T10:18:42Z
-```
+index-state: hackage.haskell.org 2023-11-01T08:02:02Z
+``

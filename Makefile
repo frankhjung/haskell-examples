@@ -6,10 +6,10 @@ CABAL	:= Examples.cabal
 SRCS	:= $(wildcard src/*.hs test/*.hs)
 
 .PHONY:	default
-default: format check build exec
+default: format check build test
 
 .PHONY: all
-all:	format check build exec
+all:	format check build test
 
 .PHONY: format
 format:
@@ -25,7 +25,7 @@ tags:
 
 .PHONY: lint
 lint:
-	@hlint --git --color $(SRCS)
+	@hlint $(SRCS)
 
 .PHONY: build
 build:	$(SRCS)
@@ -33,7 +33,7 @@ build:	$(SRCS)
 
 .PHONY: test
 test:
-	@cabal test
+	@cabal test --test-show-details=direct
 
 .PHONY: doc
 doc:
@@ -51,3 +51,5 @@ clean:
 cleanall: clean
 	@$(RM) -rf *.tix
 	@$(RM) -f cabal.project.freeze
+	@$(RM) -f report.html
+	@$(RM) -f tags
