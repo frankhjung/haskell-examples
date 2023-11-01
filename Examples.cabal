@@ -1,6 +1,6 @@
 cabal-version:      2.4
-name:               examples
-version:            0.1.0
+name:               Examples
+version:            0.3.0
 description:        Simple Haskell code examples and experiments.
 homepage:           https://gitlab.com/frankhjung1/haskell-examples/
 bug-reports:        https://gitlab.com/frankhjung1/haskell-examples/issues
@@ -8,7 +8,7 @@ license:            GPL-3.0-only
 license-file:       LICENSE
 author:             Frank H Jung
 maintainer:         frankhjung@linux.com
-copyright:          GPL-3.0-only
+copyright:          Copyright © 2021-2023 Frank H Jung
 category:           education
 extra-source-files: README.md
 
@@ -16,11 +16,25 @@ source-repository head
   type:     git
   location: https://gitlab.com/frankhjung1/haskell-examples/
 
-executable examples
-  main-is:          Main.hs
-  hs-source-dirs:   app
+library
+  hs-source-dirs:   src
   default-language: Haskell2010
   ghc-options:      -Wall
+  build-depends:    base ^>=4.17.2.0
+  exposed-modules:  Strings
+
+test-suite test
+  hs-source-dirs:     test src
+  main-is:            TestsSpec.hs
+  default-language:   Haskell2010
+  ghc-options:        -threaded -rtsopts -with-rtsopts=-N -Wall
+  type:               exitcode-stdio-1.0
+  other-modules:
+    Strings
+    StringsSpec
+
+  build-tool-depends: hspec-discover:hspec-discover
   build-depends:
-    , base   ^>=4.17.2.0
-    , hspec  ^>=2.11.7
+    , base
+    , hspec           ^>=2.11.7
+    , hspec-discover
