@@ -1,6 +1,6 @@
 cabal-version:      2.4
 name:               Examples
-version:            0.3.0
+version:            0.3.1
 description:        Simple Haskell code examples and experiments.
 homepage:           https://gitlab.com/frankhjung1/haskell-examples/
 bug-reports:        https://gitlab.com/frankhjung1/haskell-examples/issues

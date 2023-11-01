@@ -1,21 +1,34 @@
+{-|
+
+Module      : Strings
+Description : Example string functions.
+Copyright   : © Frank Jung, 2021-2023
+License     : GPL-3.0-only
+
+-}
+
 module Strings (
     -- * Types
     CharList(..)
     -- * Functions
     , removeNonUpperCase) where
 
--- new types
+-- | Example of creating and using new types.
+--
 -- >>> CharList "this will be shown!"
 -- CharList {getCharList = "this will be shown!"}
+--
 -- >>> CharList "benny" == CharList "benny"
 -- True
+--
 -- >>> CharList "benny" == CharList "andy"
 -- False
 newtype CharList = CharList
   { getCharList :: String
   } deriving (Eq, Show)
 
--- remove non upper case characters
+-- | Remove non upper case characters.
+--
 -- >>> removeNonUpperCase("ABcdeF")
 -- "ABF"
 removeNonUpperCase :: String -> String

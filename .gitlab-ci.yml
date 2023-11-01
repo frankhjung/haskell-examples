@@ -2,6 +2,7 @@
 
 stages:
   - build
+  - deploy
 
 build:
   stage: build
@@ -10,11 +11,26 @@ build:
   image:
     name: frankhjung/haskell:9.4.7
   script:
-    - make setup check build exec
+    - make setup check build doc test
+    - mv dist-newstyle/build/x86_64-linux/ghc-9.4.7/Examples-*/doc/html/Examples/ public
   artifacts:
     paths:
-      - dist-newstyle/
+      - public
   cache:
     key: ${CI_COMMIT_REF_NAME}
     paths:
       - dist-newstyle/
+
+pages:
+  stage: deploy
+  dependencies:
+    - build
+  image: alpine:latest
+  script:
+    - echo Publishing pages ...
+  artifacts:
+    paths:
+      - public
+  only:
+    refs:
+      - main

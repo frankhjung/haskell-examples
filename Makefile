@@ -35,9 +35,9 @@ build:	$(SRCS)
 test:
 	@cabal test
 
-.PHONY: exec
-exec:	# Example:  make ARGS=30 exec (default 15 fizz-buzz iterations)
-	@cabal run $(TARGET)
+.PHONY: doc
+doc:
+	@cabal haddock --haddock-hyperlink-source
 
 .PHONY: setup
 setup:
