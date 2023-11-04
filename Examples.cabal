@@ -1,6 +1,6 @@
 cabal-version:      2.4
 name:               Examples
-version:            0.3.2
+version:            0.3.3
 description:        Simple Haskell code examples and experiments.
 homepage:           https://gitlab.com/frankhjung1/haskell-examples/
 bug-reports:        https://gitlab.com/frankhjung1/haskell-examples/issues
@@ -21,20 +21,23 @@ library
   default-language: Haskell2010
   ghc-options:      -Wall
   build-depends:    base ^>=4.17.2.0
-  exposed-modules:  Strings
+  exposed-modules:
+    PatSyns
+    Strings
 
 test-suite test
   hs-source-dirs:     test src
   main-is:            TestsSpec.hs
   default-language:   Haskell2010
-  ghc-options:        -threaded -rtsopts -with-rtsopts=-N -Wall
+  ghc-options:        -Wall -Wno-missing-home-modules
   type:               exitcode-stdio-1.0
   other-modules:
-    Strings
+    PatSynsSpec
     StringsSpec
 
   build-tool-depends: hspec-discover:hspec-discover
   build-depends:
     , base
+    , Examples
     , hspec           ^>=2.11.7
     , hspec-discover
