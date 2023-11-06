@@ -1,3 +1,4 @@
+cabal.project.freeze
 dist
 dist-newstyle/
 .dyn_hi

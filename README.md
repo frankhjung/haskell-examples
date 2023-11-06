@@ -2,31 +2,34 @@
 
 A collection of code snippets and utilities.
 
-## Build
+## Build using Cabal
 
-Build using Cabal withL
+Build using Cabal with:
 
 ```bash
 cabal build
 ```
 
-## hlint
+## Lint using hlint
 
-Generate a report of hlint suggestions for a project.
+Generate a report of hlint suggestions for a project:
 
 ```bash
 hlint --git --report
 ```
 
-Generate a default `.hlint.yaml` file.
+Generate a default `.hlint.yaml` file:
 
 ```bash
 hlint --default > .hlint.yaml
 ```
 
-## Cabal Packages
+## Manage Packages with Cabal
 
-### Install Missing Package
+This project is using [Cabal](https://cabal.readthedocs.io/en/stable/) to manage
+packages.  The following commands are useful:
+
+### Install Missing Packages
 
 ```bash
 cabal install --overwrite-policy=always --lib <package-name>
@@ -37,7 +40,10 @@ cabal install --overwrite-policy=always --lib <package-name>
 Tested locally using GHC 9.4.6 and Cabal 3.6.2.0 with these packages:
 
 ```bash
-$ cabal freeze
+cabal freeze
+```
+
+```text
 active-repositories: hackage.haskell.org:merge
 constraints: any.HUnit ==1.6.2.0,
              any.QuickCheck ==2.14.3,
@@ -78,4 +84,12 @@ constraints: any.HUnit ==1.6.2.0,
              any.transformers ==0.5.6.2,
              any.unix ==2.7.3
 index-state: hackage.haskell.org 2023-11-01T08:02:02Z
-``
+```
+
+## References
+
+* [Cabal](https://cabal.readthedocs.io/en/stable/)
+* [GitLab pages](https://haskell-examples-frankhjung1-04123b730cc28cc94ba032d712dcf83c17.gitlab.io/)
+* [hlint](https://github.com/ndmitchell/hlint)
+* [Richard Eisenberg's Videos](https://richarde.dev/videos.html)
+* [TWEAG Video Playlists](https://www.youtube.com/@tweag/playlists)

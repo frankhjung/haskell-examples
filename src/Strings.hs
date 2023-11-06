@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wall #-}
+
 {-|
 
 Module      : Strings
@@ -23,9 +25,7 @@ module Strings (
 --
 -- >>> CharList "benny" == CharList "andy"
 -- False
-newtype CharList = CharList
-  { getCharList :: String
-  } deriving (Eq, Show)
+newtype CharList = CharList { getCharList :: String } deriving (Eq, Show)
 
 -- | Remove non upper case characters.
 --

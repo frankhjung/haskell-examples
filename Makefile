@@ -3,7 +3,7 @@
 .DEFAULT_GOAL := default
 
 CABAL	:= Examples.cabal
-SRCS	:= $(wildcard src/*.hs test/*.hs)
+SRCS	:= $(wildcard */*.hs)
 
 .PHONY:	default
 default: format check build test
@@ -25,7 +25,7 @@ tags:
 
 .PHONY: lint
 lint:
-	@hlint $(SRCS)
+	@hlint --cross --color $(SRCS)
 
 .PHONY: build
 build:	$(SRCS)
@@ -49,7 +49,5 @@ clean:
 
 .PHONY: cleanall
 cleanall: clean
-	@$(RM) -rf *.tix
 	@$(RM) -f cabal.project.freeze
-	@$(RM) -f report.html
 	@$(RM) -f tags

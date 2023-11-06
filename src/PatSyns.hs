@@ -5,7 +5,7 @@
 
 {-|
 Module      : PatSyns
-Description : Pattern synonyms examples from TWEAG.
+Description : Examples of pattern synonyms.
 Copyright   : © Frank Jung, 2021-2023
 License     : GPL-3.0-only
 
