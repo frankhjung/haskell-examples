@@ -49,5 +49,4 @@ clean:
 
 .PHONY: cleanall
 cleanall: clean
-	@$(RM) -f cabal.project.freeze
 	@$(RM) -f tags
