@@ -1,6 +1,6 @@
 cabal-version:      2.4
 name:               Examples
-version:            0.3.4
+version:            0.3.5
 description:        Simple Haskell code examples and experiments.
 homepage:           https://gitlab.com/frankhjung1/haskell-examples/
 bug-reports:        https://gitlab.com/frankhjung1/haskell-examples/issues
@@ -22,6 +22,7 @@ library
   ghc-options:      -Wall
   build-depends:    base ^>=4.17.2.0
   exposed-modules:
+    Months
     PatSyns
     Singletons
     Strings
@@ -33,6 +34,7 @@ test-suite test
   ghc-options:        -Wall -Wno-missing-home-modules
   type:               exitcode-stdio-1.0
   other-modules:
+    MonthsSpec
     PatSynsSpec
     SingletonsSpec
     StringsSpec

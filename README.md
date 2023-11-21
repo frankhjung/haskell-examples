@@ -90,6 +90,7 @@ index-state: hackage.haskell.org 2023-11-01T08:02:02Z
 
 * [Cabal](https://cabal.readthedocs.io/en/stable/)
 * [GitLab pages](https://haskell-examples-frankhjung1-04123b730cc28cc94ba032d712dcf83c17.gitlab.io/)
+* [Haskell Cookbook](https://www.packtpub.com/product/haskell-cookbook/9781786461353)
 * [hlint](https://github.com/ndmitchell/hlint)
 * [Richard Eisenberg's Videos](https://richarde.dev/videos.html)
 * [TWEAG Video Playlists](https://www.youtube.com/@tweag/playlists)

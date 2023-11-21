@@ -17,10 +17,12 @@ to abstract over a pattern.
 -}
 
 module PatSyns
-  ( Card (.., CJack, CQueen, CKing, CAce),
-    Honor (..),
-    checkEven,
-    numCardsToPlay,
+  ( -- * Types
+    Card (.., CJack, CQueen, CKing, CAce)
+  , Honor (..)
+    -- * Functions
+  , checkEven
+  , numCardsToPlay
   ) where
 
 import           Numeric.Natural (Natural)

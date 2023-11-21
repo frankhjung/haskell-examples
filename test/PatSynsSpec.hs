@@ -1,4 +1,6 @@
-module PatSynsSpec (spec) where
+module PatSynsSpec
+  ( spec
+  ) where
 
 import           PatSyns    (Honor (..), checkEven, numCardsToPlay)
 import           Test.Hspec (Spec, describe, it, shouldBe)

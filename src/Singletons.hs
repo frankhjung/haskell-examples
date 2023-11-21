@@ -57,13 +57,14 @@ one (SMaybe _) = Just ()
 @
 
 -}
-module Singletons (
-  --  * Types
+module Singletons
+  ( --  * Types
     SingT(..)
   , Wrap(..)
-  -- * Functions
+    -- * Functions
   , zero
-  , eqSingT) where
+  , eqSingT
+  ) where
 
 -- | A very simple newtype wrapper.
 newtype Wrap a = Wrap a deriving stock (Show)

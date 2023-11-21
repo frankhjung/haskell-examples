@@ -9,11 +9,12 @@ License     : GPL-3.0-only
 
 -}
 
-module Strings (
-    -- * Types
+module Strings
+  ( -- * Types
     CharList(..)
     -- * Functions
-    , removeNonUpperCase) where
+  , removeNonUpperCase
+  ) where
 
 -- | Example of creating and using new types.
 --
