@@ -5,6 +5,7 @@ module FuncTypeSpec
 import           FuncType              (Func (..), apply, compose)
 import           Test.Hspec            (Spec, describe)
 import           Test.Hspec.QuickCheck (prop)
+
 -- | Double an integer.
 f :: Int -> Int
 f = (* 2)

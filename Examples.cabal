@@ -28,6 +28,7 @@ library
     FuncType
     Months
     PatSyns
+    RankNTypes
     Singletons
     Strings
 
@@ -41,6 +42,7 @@ test-suite test
     FuncTypeSpec
     MonthsSpec
     PatSynsSpec
+    RankNTypesSpec
     SingletonsSpec
     StringsSpec
 
