@@ -1,7 +1,6 @@
 {-# LANGUAGE LambdaCase      #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE ViewPatterns    #-}
-{-# OPTIONS_GHC -Wall #-}
 
 {-|
 Module      : PatSyns

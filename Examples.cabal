@@ -26,6 +26,7 @@ library
 
   exposed-modules:
     FuncType
+    Greeting
     Months
     PatSyns
     RankNTypes
@@ -40,6 +41,7 @@ test-suite test
   type:               exitcode-stdio-1.0
   other-modules:
     FuncTypeSpec
+    GreetingSpec
     MonthsSpec
     PatSynsSpec
     RankNTypesSpec
