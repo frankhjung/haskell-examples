@@ -1,7 +1,7 @@
 {-|
 
 Module      : FuncType
-Description : Type with function value example.
+Description : Types with functions as values.
 Copyright   : © Frank Jung, 2023
 License     : GPL-3.0-only
 
@@ -34,10 +34,10 @@ module FuncType
   , compose
   ) where
 
--- | Type with function value.
+-- | Type with a function value.
 newtype Func a b = Func (a -> b)
 
--- | Apply a function to a value.
+-- | Apply function to a value.
 apply :: Func a b -> a -> b
 apply (Func f) = f
 

@@ -9,7 +9,7 @@ SRCS	:= $(wildcard */*.hs)
 default: format check build test
 
 .PHONY: all
-all:	format check build test
+all:	format check build test doc
 
 .PHONY: format
 format:

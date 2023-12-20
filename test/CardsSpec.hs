@@ -1,13 +1,13 @@
-module PatSynsSpec
+module CardsSpec
   ( spec
   ) where
 
-import           PatSyns    (Honor (..), checkEven, numCardsToPlay)
+import           Cards      (Honor (..), checkEven, numCardsToPlay)
 import           Test.Hspec (Spec, describe, it, shouldBe)
 
 spec :: Spec
 spec =
-  describe "PatSyns" $ do
+  describe "Cards" $ do
     it "checkEven" $ do
       checkEven 2 `shouldBe` True
       checkEven 3 `shouldBe` False

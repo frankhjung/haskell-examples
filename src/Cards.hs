@@ -3,8 +3,8 @@
 {-# LANGUAGE ViewPatterns    #-}
 
 {-|
-Module      : PatSyns
-Description : Examples of pattern synonyms.
+Module      : Cards
+Description : Examples of pattern synonyms using playing cards.
 Copyright   : © Frank Jung, 2021-2023
 License     : GPL-3.0-only
 
@@ -15,7 +15,7 @@ to abstract over a pattern.
 
 -}
 
-module PatSyns
+module Cards
   ( -- * Types
     Card (.., CJack, CQueen, CKing, CAce)
   , Honor (..)

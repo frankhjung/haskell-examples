@@ -25,10 +25,10 @@ library
     , QuickCheck
 
   exposed-modules:
+    Cards
     FuncType
     Greeting
     Months
-    PatSyns
     RankNTypes
     Singletons
     Strings
@@ -40,10 +40,10 @@ test-suite test
   ghc-options:        -Wall -Wno-missing-home-modules
   type:               exitcode-stdio-1.0
   other-modules:
+    CardsSpec
     FuncTypeSpec
     GreetingSpec
     MonthsSpec
-    PatSynsSpec
     RankNTypesSpec
     SingletonsSpec
     StringsSpec
