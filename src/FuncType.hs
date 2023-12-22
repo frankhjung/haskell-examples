@@ -12,17 +12,19 @@ Some use-cases for using functions as types:
 
 == Generic programming and type classes
 
-Functions as types play a crucial role in generic programming, where
-algorithms are written to work with a variety of data types. Type classes,
-which categorize types based on shared properties, often utilize functions
-as types to define these properties and enable generic operations.
+Functions as types are essential in generic programming, where algorithms are
+designed to operate seamlessly across various data types. Type classes, which
+organize types according to shared characteristics, frequently leverage
+functions as types to articulate these characteristics and facilitate generic
+operations.
 
-==  Metaprogramming and type-level computations
+==  Meta-programming and type-level computations
 
-Functions as types enable metaprogramming, where programs manipulate other
-programs or their representations. Type-level computations, where
-calculations are performed at compile time using type information, can also
-be achieved using functions as types.
+Meta-programming and type-level computations involve the use of functions as
+types. This concept allows programs to manipulate other programs or their
+representations. Additionally, functions as types facilitate type-level
+computations, where calculations are carried out during compile time using type
+information.
 
 -}
 
