@@ -2,7 +2,7 @@ module CardsSpec
   ( spec
   ) where
 
-import           Cards      (Honor (..), checkEven, numCardsToPlay)
+import           Cards      (Card (..), Honor (..), checkEven, numCardsToPlay)
 import           Test.Hspec (Spec, describe, it, shouldBe)
 
 spec :: Spec
@@ -16,3 +16,12 @@ spec =
       numCardsToPlay HQueen `shouldBe` 2
       numCardsToPlay HKing `shouldBe` 3
       numCardsToPlay HAce `shouldBe` 4
+    it "honour card ordering" $ do
+      HJack < HQueen `shouldBe` True
+      HQueen < HKing `shouldBe` True
+      HKing < HAce `shouldBe` True
+    it "card ordering" $ do
+      C10 < CJack `shouldBe` True
+      CJack < CQueen `shouldBe` True
+      CQueen < CKing `shouldBe` True
+      CKing < CAce `shouldBe` True

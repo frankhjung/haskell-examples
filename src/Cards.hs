@@ -28,9 +28,11 @@ import           Numeric.Natural (Natural)
 
 -- | Enumerated Cards including 'Honor' cards.
 data Card = C2 | C3 | C4 | C5 | C6 | C7 | C8 | C9 | C10 | CHonor Honor
+  deriving (Eq, Ord)
 
 -- | Honor cards.
 data Honor = HJack | HQueen | HKing | HAce
+  deriving (Eq, Ord)
 
 -- | Show instance for 'Card' type.
 -- >>> show [CJack, CQueen, CKing, CAce, C7]
@@ -54,7 +56,6 @@ instance Show Card where
     CQueen -> "Q"
     CKing  -> "K"
     CAce   -> "A"
-
 
 -- Used to tell GHC that we have included all possible patterns.
 {-# COMPLETE C2, C3, C4, C5, C6, C7, C8, C9, C10, CJack, CQueen, CKing, CAce #-}
