@@ -63,6 +63,23 @@ defaultMessage = GreetingMessage {
   , greetingTo = Name "World"
   , greetingFrom = []}
 
+{- | Format greeting message.
+
+>>> formatMessage defaultMessage
+"Hello, World!"
+
+>>> formatMessage (defaultMessage {greetingTo = Name "Robyn", greetingFrom = [Name "Frank"]})
+"Hello, Robyn! from Frank"
+
+-}
+formatMessage :: GreetingMessage -> String
+formatMessage (GreetingMessage (Salutation s) (Name to) from) =
+  fmt $ "" +| s |+ ", " +| to |+ "!" +| fromStr |+ ""
+  where
+    fromStr
+      | null from = ""
+      | otherwise = " from " <> intercalate ", " (map getName from)
+
 -- | Redacted type class.
 class Redacted a where
   redacted :: a -> String
@@ -83,20 +100,3 @@ newtype Secret = Secret String
 -- | Secret type instance of Redacted will not show string.
 instance Redacted Secret where
   redacted (Secret _) = "(redacted)"
-
-{- | Format greeting message.
-
->>> formatMessage defaultMessage
-"Hello, World!"
-
->>> formatMessage (defaultMessage {greetingTo = Name "Robyn", greetingFrom = [Name "Frank"]})
-"Hello, Robyn! from Frank"
-
--}
-formatMessage :: GreetingMessage -> String
-formatMessage (GreetingMessage (Salutation s) (Name to) from) =
-    fmt $ "" +|s|+ ", " +|to|+ "!" +|fromStr
-    where
-      fromStr
-        | null from = fmt ""
-        | otherwise = fmt $ " from " +|intercalate ", " (map getName from)|+ ""
