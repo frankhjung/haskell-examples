@@ -37,13 +37,14 @@ cabal install --overwrite-policy=always --lib <package-name>
 
 ### Package Versions
 
-Tested locally using GHC 9.4.6 and Cabal 3.6.2.0 with these packages:
+Tested locally using GHC 9.4.6 and Cabal 3.6.2.0 with these packages
+[cabal.project.freeze](cabal.project.freeze)
+
+To update this file, run:
 
 ```bash
 cabal freeze
 ```
-
-See [cabal.project.freeze](cabal.project.freeze)
 
 ## References
 

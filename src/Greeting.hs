@@ -5,12 +5,8 @@
 
 Module      : Greeting
 Description : Effective Haskell module example.
-Copyright   : © Frank Jung, 2023
+Copyright   : © Frank Jung, 2023-2024
 License     : GPL-3.0-only
-
-== TODO
-
-- refactor to use `fmt` package
 
 -}
 
@@ -28,6 +24,8 @@ module Greeting (
 ) where
 
 import           Data.List (intercalate)
+import           Fmt       (fmt, (+|), (|+))
+
 
 -- | Name type.
 newtype Name = Name {getName :: String}
@@ -97,8 +95,8 @@ instance Redacted Secret where
 -}
 formatMessage :: GreetingMessage -> String
 formatMessage (GreetingMessage (Salutation s) (Name to) from) =
-    s <> ", " <> to <> "!" <> fromStr
+    fmt $ "" +|s|+ ", " +|to|+ "!" +|fromStr
     where
       fromStr
-        | null from = ""
-        | otherwise = " from " <> intercalate ", " (map getName from)
+        | null from = fmt ""
+        | otherwise = fmt $ " from " +|intercalate ", " (map getName from)|+ ""

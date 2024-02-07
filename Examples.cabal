@@ -8,7 +8,7 @@ license:            GPL-3.0-only
 license-file:       LICENSE
 author:             Frank H Jung
 maintainer:         frankhjung@linux.com
-copyright:          Copyright © 2023 Frank H Jung
+copyright:          Copyright © 2023-2024 Frank H Jung
 category:           education
 extra-source-files: README.md
 
@@ -17,11 +17,13 @@ source-repository head
   location: https://gitlab.com/frankhjung1/haskell-examples/
 
 library
-  hs-source-dirs:   src
-  default-language: Haskell2010
-  ghc-options:      -Wall
+  hs-source-dirs:     src
+  default-language:   Haskell2010
+  ghc-options:        -Wall
+  default-extensions: OverloadedStrings
   build-depends:
     , base        ^>=4.17.2.0
+    , fmt         ^>=0.6.3.0
     , QuickCheck
 
   exposed-modules:
@@ -38,6 +40,7 @@ test-suite test
   main-is:            TestsSpec.hs
   default-language:   Haskell2010
   ghc-options:        -Wall -Wno-missing-home-modules
+  default-extensions: OverloadedStrings
   type:               exitcode-stdio-1.0
   other-modules:
     CardsSpec
@@ -52,6 +55,7 @@ test-suite test
   build-depends:
     , base
     , Examples
+    , fmt
     , hspec           ^>=2.11.7
     , hspec-discover
     , QuickCheck      ^>=2.14.3

@@ -30,6 +30,6 @@ spec =
       \(NonEmpty (xs::[String])) -> formatMessage (defaultMessage {greetingFrom = map Name xs})
         `shouldBe` "Hello, World! from " <> intercalate ", " xs
     prop "redacted Common" $
-      \(s :: String) -> redacted (Common s) `shouldBe` s
+      \(xs :: String) -> redacted (Common xs) `shouldBe` xs
     prop "redacted Secret" $
-      \(s :: String) -> redacted (Secret s) `shouldBe` "(redacted)"
+      \(xs :: String) -> redacted (Secret xs) `shouldBe` "(redacted)"
