@@ -1,3 +1,4 @@
+{-# LANGUAGE DefaultSignatures  #-}
 {-# LANGUAGE StandaloneDeriving #-}
 
 {-|
@@ -18,6 +19,9 @@ module Greeting (
   Name (..)
   , Salutation (..)
   , GreetingMessage (..)
+  , Secret (..)
+  , Common (..)
+  , Redacted (..)
   -- * Functions
   , defaultMessage
   , formatMessage
@@ -60,6 +64,27 @@ defaultMessage = GreetingMessage {
     greetingSalutation = Salutation "Hello"
   , greetingTo = Name "World"
   , greetingFrom = []}
+
+-- | Redacted type class.
+class Redacted a where
+  redacted :: a -> String
+  default redacted :: Show a => a -> String
+  redacted = show
+
+-- | Common type.
+newtype Common = Common String
+instance Show Common where
+  show (Common s) = s
+
+-- | Common type instance of Redacted.
+-- This will echo the string as is.
+instance Redacted Common
+
+-- | Secret type.
+newtype Secret = Secret String
+-- | Secret type instance of Redacted will not show string.
+instance Redacted Secret where
+  redacted (Secret _) = "(redacted)"
 
 {- | Format greeting message.
 

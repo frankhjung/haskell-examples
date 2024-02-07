@@ -6,9 +6,11 @@ module GreetingSpec
   ) where
 
 import           Data.List                 (intercalate)
-import           Greeting                  (GreetingMessage (..), Name (..),
-                                            Salutation (..), defaultMessage,
-                                            formatMessage)
+import           Greeting                  (Common (..), GreetingMessage (..),
+                                            Name (..), Redacted (..),
+                                            Salutation (..), Secret (..),
+                                            defaultMessage, formatMessage,
+                                            redacted)
 import           Test.Hspec                (Spec, describe, it, shouldBe)
 import           Test.Hspec.QuickCheck     (prop)
 import           Test.QuickCheck.Modifiers (NonEmptyList (NonEmpty))
@@ -27,3 +29,7 @@ spec =
     prop "formatMessage with random from list" $
       \(NonEmpty (xs::[String])) -> formatMessage (defaultMessage {greetingFrom = map Name xs})
         `shouldBe` "Hello, World! from " <> intercalate ", " xs
+    prop "redacted Common" $
+      \(s :: String) -> redacted (Common s) `shouldBe` s
+    prop "redacted Secret" $
+      \(s :: String) -> redacted (Secret s) `shouldBe` "(redacted)"
