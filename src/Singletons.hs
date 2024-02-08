@@ -1,6 +1,7 @@
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GADTs              #-}
 {-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE TypeApplications   #-}
 
 {-|
 
@@ -59,14 +60,16 @@ one (SMaybe _) = Just ()
 module Singletons
   ( --  * Types
     SingT(..)
-  , Wrap(..)
+  , Wrapper(..)
     -- * Functions
   , zero
   , eqSingT
+  , convertViaInt
+
   ) where
 
 -- | A very simple newtype wrapper.
-newtype Wrap a = Wrap a deriving stock (Show)
+newtype Wrapper a = Wrapper {getWrapper :: a} deriving stock (Show)
 
 -- | 'SingT' is a example of a Singleton type.
 -- This is an [indexed type](https://wiki.haskell.org/GHC/Type_families).
@@ -81,7 +84,7 @@ newtype Wrap a = Wrap a deriving stock (Show)
 --   | forall a. (t ~ [a]) => SList (SingT a)
 --   | (t ~ ()) => SUnit
 --   | forall a b. (t ~ (a -> b)) => SArrow (SingT a) (SingT b)
---   | forall a. (t ~ Wrap a) => SWrap (SingT a)
+--   | forall a. (t ~ Wrapper a) => SWrapper (SingT a)
 -- @
 data SingT t where
   SArrow :: SingT a -> SingT b -> SingT (a -> b)
@@ -90,7 +93,7 @@ data SingT t where
   SList :: SingT a -> SingT [a]
   SMaybe :: SingT a -> SingT (Maybe a)
   SUnit :: SingT ()
-  SWrap :: SingT a -> SingT (Wrap a)
+  SWrapper :: SingT a -> SingT (Wrapper a)
 
 deriving instance Show (SingT t)
 
@@ -101,7 +104,7 @@ deriving instance Show (SingT t)
 --
 -- >>> zero SInt
 -- 0
--- >>> zero SWrap SBool
+-- >>> zero SWrapper SBool
 -- False
 -- >>> zero (SMaybe SInt)
 -- Nothing
@@ -112,9 +115,11 @@ zero SInt           = 0
 zero (SList _)      = []
 zero (SMaybe _)     = Nothing
 zero SUnit          = ()
-zero (SWrap a)      = Wrap (zero a)
+zero (SWrapper a)   = Wrapper (zero a)
 
 -- One: this doesn't work because the 't' type is not known at compile time.
+--
+-- @
 -- one :: SingT t -> t
 -- one (SArrow _ res) = const (one res)
 -- one SBool          = True
@@ -122,7 +127,9 @@ zero (SWrap a)      = Wrap (zero a)
 -- one (SList _)      = [one (SList SInt)]
 -- one (SMaybe _)     = Just (one SUnit)
 -- one SUnit          = ()
--- one (SWrap a)      = Wrap (one a)
+-- one (SWrapper a)      = Wrapper (one a)
+-- @
+--
 
 -- | Define equality for each Singleton type.
 eqSingT :: SingT t -> SingT t -> Bool
@@ -132,4 +139,40 @@ eqSingT SInt SInt                 = True
 eqSingT (SList a) (SList b)       = a `eqSingT` b
 eqSingT (SMaybe a) (SMaybe b)     = a `eqSingT` b
 eqSingT SUnit SUnit               = True
-eqSingT (SWrap a) (SWrap b)       = a `eqSingT` b
+eqSingT (SWrapper a) (SWrapper b) = a `eqSingT` b
+
+-- | Example of specified and inferred types.
+-- This is from "Effective Haskell, Specified and Inferred Types" by Rebecca
+-- Skinner.
+--
+-- === Explanation
+--
+-- When the type is specified in the signature, then we have un-bracketed terms:
+--
+-- @
+-- λ>  :set -fprint-explicit-foralls
+-- λ> :t convertViaInt
+-- convertViaInt :: forall a b. (Integral a, Num b) => a -> b
+-- @
+--
+-- However, when the type is inferred, then we have bracketed terms:
+-- (Inferred when the type is not specified in the signature.)
+--
+-- @
+-- λ> :t convertViaInt
+-- convertViaInt :: forall {a} {b}. (Integral a, Num b) => a -> b
+-- @
+--
+-- You can mix these two styles:
+--
+-- @
+-- λ> :set -XTypeApplications
+-- λ> :set -XExplicitForAll
+-- convertViaInt :: forall {a} b. (Integral a, Num b) => a -> b
+-- convertViaInt x = fromIntegral $ fromIntegral @_ @Int x
+--
+-- λ> :t convertViaInt @Double 100
+-- 100.0
+-- @
+convertViaInt :: (Integral a, Num b) => a -> b
+convertViaInt x = fromIntegral $ fromIntegral @_ @Int x

@@ -15,9 +15,9 @@ module Greeting (
   Name (..)
   , Salutation (..)
   , GreetingMessage (..)
-  , Secret (..)
-  , Common (..)
   , Redacted (..)
+  , Common (..)
+  , Secret (..)
   -- * Functions
   , defaultMessage
   , formatMessage

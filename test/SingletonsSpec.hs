@@ -1,10 +1,13 @@
+{-# LANGUAGE ScopedTypeVariables #-}
+
 module SingletonsSpec
   ( spec
   ) where
 
-import           Singletons (SingT (SBool, SInt, SList, SMaybe, SUnit, SWrap),
-                             eqSingT, zero)
-import           Test.Hspec (Spec, describe, it, shouldBe)
+import           Singletons            (SingT (SBool, SInt, SList, SMaybe, SUnit, SWrapper),
+                                        convertViaInt, eqSingT, zero)
+import           Test.Hspec            (Spec, describe, it, shouldBe)
+import           Test.Hspec.QuickCheck (prop)
 
 spec :: Spec
 spec = do
@@ -22,5 +25,7 @@ spec = do
   describe "eqSingT" $ do
     it "eqSingT (SMaybe a) (SMaybe b)" $
       eqSingT (SMaybe SInt) (SMaybe SInt) `shouldBe` True
-    it "eqSingT (SWrap a) (SWrap b)"
-      $ eqSingT (SWrap SInt) (SWrap SInt) `shouldBe` True
+    it "eqSingT (SWrapper a) (SWrapper b)"
+      $ eqSingT (SWrapper SInt) (SWrapper SInt) `shouldBe` True
+  prop "convertViaInt" $
+    \(x :: Int) -> convertViaInt x `shouldBe` x
