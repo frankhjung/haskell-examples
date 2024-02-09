@@ -32,6 +32,7 @@ library
     Greeting
     Months
     RankNTypes
+    Selector
     Singletons
     Strings
 
@@ -48,6 +49,7 @@ test-suite test
     GreetingSpec
     MonthsSpec
     RankNTypesSpec
+    SelectorSpec
     SingletonsSpec
     StringsSpec
 
