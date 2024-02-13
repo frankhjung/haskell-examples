@@ -16,6 +16,7 @@ module Selector
   ( -- * Types
     Select (..)
   , Selector(..)
+  , MyMaybe(..)
   ) where
 
 import           Data.Kind (Type)
@@ -47,3 +48,8 @@ instance (Select f) => Semigroup (Selector f a) where
 -- | Monoid instance for 'Selector'.
 instance (Select f) => Monoid (Selector f a) where
   mempty = Selector empty
+
+-- | 'MyMaybe' and 'Selector Maybe a' are representationally equal to 'Maybe a'.
+newtype MyMaybe a = MyMaybe (Maybe a)
+  deriving (Show, Eq)
+  deriving (Semigroup, Monoid) via (Selector Maybe a)
