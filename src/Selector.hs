@@ -13,10 +13,21 @@ From "Effective Haskell" by Rebecca Skinner (B9.0 14 March 2023).
 
 module Selector
   ( -- * Types
-    Selector(..)
+    MyMaybe(..)
+  , Selector(..)
   ) where
 
 import           Data.Kind (Type)
+
+-- | A newtype wrapper for 'Maybe'.
+newtype MyMaybe a = MyMaybe (Maybe a) deriving (Show, Eq)
+
+instance Semigroup (MyMaybe a) where
+  (MyMaybe Nothing) <> b = b
+  a <> _                 = a
+
+instance Monoid (MyMaybe a) where
+  mempty = MyMaybe Nothing
 
 -- | A class for types that can be used to select between two values.
 class Selector (f :: Type -> Type) where

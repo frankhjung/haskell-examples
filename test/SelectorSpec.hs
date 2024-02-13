@@ -4,12 +4,17 @@ module SelectorSpec
   ( spec
   ) where
 
-import           Selector              (Selector (..))
+import           Selector              (MyMaybe (..), Selector (..))
 import           Test.Hspec            (Spec, describe, it, shouldBe)
 import           Test.Hspec.QuickCheck (prop)
 
 spec :: Spec
 spec = do
+    describe "MyMaybe" $ do
+        prop "MyMaybe Semigroup Just values" $
+            \(x :: Int) (y :: Int) -> MyMaybe (Just x) <> MyMaybe (Just y) `shouldBe` MyMaybe (Just x)
+        prop "MyMaybe Semigroup Nothing" $
+          \(y:: Maybe Int) -> MyMaybe Nothing <> MyMaybe y `shouldBe` MyMaybe y
     describe "from Maybe Selector" $ do
         it "select" $
             select (Just 1) Nothing `shouldBe` (Just 1 :: Maybe Int)
