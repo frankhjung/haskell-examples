@@ -88,6 +88,8 @@ class Redacted a where
 
 -- | Common type.
 newtype Common = Common String
+-- | Override Show instance to echo result with out type signature.
+-- A better way is to use GeneralizedNewtypeDeriving extension to derive Show instance.
 instance Show Common where
   show (Common s) = s
 
