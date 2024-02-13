@@ -23,11 +23,10 @@ import           Data.Kind (Type)
 newtype MyMaybe a = MyMaybe (Maybe a) deriving (Show, Eq)
 
 instance Semigroup (MyMaybe a) where
-  (MyMaybe Nothing) <> b = b
-  a <> _                 = a
+  (MyMaybe a) <> (MyMaybe b) = MyMaybe (select a b)
 
 instance Monoid (MyMaybe a) where
-  mempty = MyMaybe Nothing
+  mempty = MyMaybe empty
 
 -- | A class for types that can be used to select between two values.
 class Selector (f :: Type -> Type) where
