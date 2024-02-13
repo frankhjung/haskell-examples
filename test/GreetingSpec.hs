@@ -7,8 +7,9 @@ module GreetingSpec
 
 import           Data.List                 (intercalate)
 import           Greeting                  (Common (..), GreetingMessage (..),
-                                            Name (..), Redacted (..),
-                                            Salutation (..), Secret (..),
+                                            Name (..), Password (..),
+                                            Redacted (..), Salutation (..),
+                                            Secret (..), UserName (..),
                                             defaultMessage, formatMessage,
                                             redacted)
 import           Test.Hspec                (Spec, describe, it, shouldBe)
@@ -33,3 +34,7 @@ spec =
       \(xs :: String) -> redacted (Common xs) `shouldBe` xs
     prop "redacted Secret" $
       \(xs :: String) -> redacted (Secret xs) `shouldBe` "(redacted)"
+    prop "show UserName" $
+      \(xs :: String) -> redacted (UserName xs) `shouldBe` show (UserName xs)
+    prop "show Password" $
+      \(xs :: String) -> redacted (Password xs) `shouldBe` "(redacted)"

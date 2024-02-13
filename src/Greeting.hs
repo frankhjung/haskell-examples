@@ -1,4 +1,5 @@
 {-# LANGUAGE DefaultSignatures  #-}
+{-# LANGUAGE DeriveAnyClass     #-}
 {-# LANGUAGE StandaloneDeriving #-}
 
 {-|
@@ -18,6 +19,8 @@ module Greeting (
   , Redacted (..)
   , Common (..)
   , Secret (..)
+  , UserName (..)
+  , Password (..)
   -- * Functions
   , defaultMessage
   , formatMessage
@@ -101,4 +104,11 @@ instance Redacted Common
 newtype Secret = Secret String
 -- | Secret type instance of Redacted will not show string.
 instance Redacted Secret where
-  redacted (Secret _) = "(redacted)"
+  redacted _ = "(redacted)"
+
+-- | Simpler way to implement Redacted instance for Secret.
+newtype UserName = UserName String deriving (Show, Eq, Redacted)
+
+newtype Password = Password String
+instance Redacted Password where
+  redacted _ = "(redacted)"
