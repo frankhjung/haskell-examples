@@ -1,5 +1,6 @@
 {-# LANGUAGE DefaultSignatures  #-}
 {-# LANGUAGE DeriveAnyClass     #-}
+{-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE StandaloneDeriving #-}
 
 {-|
@@ -20,6 +21,7 @@ module Greeting (
   , Common (..)
   , Secret (..)
   , UserName (..)
+  , AdminUser (..)
   -- * Functions
   , defaultMessage
   , formatMessage
@@ -106,4 +108,13 @@ instance Redacted Secret where
   redacted _ = "(redacted)"
 
 -- | Simpler way to implement Redacted instance for Secret.
-newtype UserName = UserName String deriving (Show, Eq, Redacted)
+-- Needs the `DeriveAnyClass` extension.
+-- Overrides Show instance to give a customised value.
+newtype UserName = UserName String deriving (Eq, Redacted)
+instance Show UserName where
+  show (UserName user) = "UserName: " <> user
+
+-- | AdminUer type. Will override Redacted instance to give a customised value.
+newtype AdminUser = AdminUser UserName deriving stock Show
+instance Redacted AdminUser where
+  redacted (AdminUser (UserName user)) = "AdminUser: " <> user
