@@ -93,7 +93,8 @@ class Redacted a where
 -- | Common type.
 newtype Common = Common String
 -- | Override Show instance to echo result with out type signature.
--- A better way is to use GeneralizedNewtypeDeriving extension to derive Show instance.
+-- A better way is to use GeneralizedNewtypeDeriving extension to derive the
+-- Show instance.  This Show instance does not show the type.
 instance Show Common where
   show (Common s) = s
 
@@ -103,18 +104,20 @@ instance Redacted Common
 
 -- | Secret type.
 newtype Secret = Secret String
--- | Secret type instance of Redacted will not show string.
+-- | Redacted will not show string value for this 'Secret' type.
 instance Redacted Secret where
   redacted _ = "(redacted)"
 
--- | Simpler way to implement Redacted instance for Secret.
+-- | Simpler way to implement Redacted instance for 'Secret'.
 -- Needs the `DeriveAnyClass` extension.
 -- Overrides Show instance to give a customised value.
-newtype UserName = UserName String deriving (Eq, Redacted)
-instance Show UserName where
-  show (UserName user) = "UserName: " <> user
+newtype UserName = UserName String deriving (Eq, Show, Redacted)
+-- custom Show instance
+-- instance Show UserName where
+--   show (UserName user) = "UserName: " <> user
 
 -- | AdminUer type. Will override Redacted instance to give a customised value.
-newtype AdminUser = AdminUser UserName deriving stock Show
+newtype AdminUser = AdminUser UserName deriving stock (Eq, Show)
+-- custom Redacted instance
 instance Redacted AdminUser where
-  redacted (AdminUser (UserName user)) = "AdminUser: " <> user
+  redacted (AdminUser (UserName user)) = "AdminUser " <> user

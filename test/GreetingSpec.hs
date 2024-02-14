@@ -35,6 +35,6 @@ spec =
     prop "redacted Secret" $
       \(xs :: String) -> redacted (Secret xs) `shouldBe` "(redacted)"
     prop "show UserName" $
-      \(xs :: String) -> redacted (UserName xs) `shouldBe` "UserName: " <> xs
+      \(xs :: String) -> redacted (UserName xs) `shouldBe` show (UserName xs)
     prop "show AdminUser" $
-      \(xs :: String) -> redacted (AdminUser (UserName xs)) `shouldBe` "AdminUser: " <> xs
+      \(xs :: String) -> redacted (AdminUser (UserName xs)) `shouldBe` "AdminUser " <> xs
