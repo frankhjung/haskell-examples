@@ -20,7 +20,6 @@ module Greeting (
   , Common (..)
   , Secret (..)
   , UserName (..)
-  , Password (..)
   -- * Functions
   , defaultMessage
   , formatMessage
@@ -108,7 +107,3 @@ instance Redacted Secret where
 
 -- | Simpler way to implement Redacted instance for Secret.
 newtype UserName = UserName String deriving (Show, Eq, Redacted)
-
-newtype Password = Password String
-instance Redacted Password where
-  redacted _ = "(redacted)"

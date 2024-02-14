@@ -7,11 +7,10 @@ module GreetingSpec
 
 import           Data.List                 (intercalate)
 import           Greeting                  (Common (..), GreetingMessage (..),
-                                            Name (..), Password (..),
-                                            Redacted (..), Salutation (..),
-                                            Secret (..), UserName (..),
-                                            defaultMessage, formatMessage,
-                                            redacted)
+                                            Name (..), Redacted (..),
+                                            Salutation (..), Secret (..),
+                                            UserName (..), defaultMessage,
+                                            formatMessage, redacted)
 import           Test.Hspec                (Spec, describe, it, shouldBe)
 import           Test.Hspec.QuickCheck     (prop)
 import           Test.QuickCheck.Modifiers (NonEmptyList (NonEmpty))
@@ -36,5 +35,3 @@ spec =
       \(xs :: String) -> redacted (Secret xs) `shouldBe` "(redacted)"
     prop "show UserName" $
       \(xs :: String) -> redacted (UserName xs) `shouldBe` show (UserName xs)
-    prop "show Password" $
-      \(xs :: String) -> redacted (Password xs) `shouldBe` "(redacted)"
