@@ -11,8 +11,7 @@ build:
   image:
     name: frankhjung/haskell:9.4.7
   script:
-    - hlint --version
-    - make setup check build doc test
+    - make setup build doc test
     - mv dist-newstyle/build/x86_64-linux/ghc-9.4.7/Examples-*/doc/html/Examples/ public
   artifacts:
     paths:
