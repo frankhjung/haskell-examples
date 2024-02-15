@@ -31,6 +31,7 @@ library
     FuncType
     Greeting
     Months
+    Nullable
     RankNTypes
     Selector
     Singletons
@@ -48,6 +49,7 @@ test-suite test
     FuncTypeSpec
     GreetingSpec
     MonthsSpec
+    NullableSpec
     RankNTypesSpec
     SelectorSpec
     SingletonsSpec
