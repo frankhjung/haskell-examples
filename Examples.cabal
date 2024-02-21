@@ -34,6 +34,7 @@ library
     Nullable
     RankNTypes
     Selector
+    ShowFile
     Singletons
     Strings
 
@@ -44,17 +45,6 @@ test-suite test
   ghc-options:        -Wall -Wno-missing-home-modules
   default-extensions: OverloadedStrings
   type:               exitcode-stdio-1.0
-  other-modules:
-    CardsSpec
-    FuncTypeSpec
-    GreetingSpec
-    MonthsSpec
-    NullableSpec
-    RankNTypesSpec
-    SelectorSpec
-    SingletonsSpec
-    StringsSpec
-
   build-tool-depends: hspec-discover:hspec-discover
   build-depends:
     , base
