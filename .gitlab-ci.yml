@@ -9,10 +9,10 @@ build:
   except:
     - tags
   image:
-    name: frankhjung/haskell:9.4.7
+    name: frankhjung/haskell:9.4.8
   script:
     - make setup build doc test
-    - mv dist-newstyle/build/x86_64-linux/ghc-9.4.7/Examples-*/doc/html/Examples/ public
+    - mv dist-newstyle/build/x86_64-linux/ghc-9.4.8/Examples-*/doc/html/Examples/ public
   artifacts:
     paths:
       - public
