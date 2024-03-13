@@ -9,11 +9,28 @@ License     : GPL-3.0-only
 
 module ShowFile (
     noPasswd
-  , showFile
+  , showContent
   , makeAndReadFile
   , makeAndShow
   , safeIO
+  , getFileInfo
+  , showTime
+  -- * Types
+  , FileInfo (..)
   ) where
+
+import qualified Data.Time.Clock  as Clock
+import           Data.Time.Format (defaultTimeLocale, formatTime)
+import qualified System.Directory as Dir
+
+data FileInfo = FileInfo {
+  _path  :: FilePath
+, _size  :: Integer
+, _mtime :: Clock.UTCTime
+, _read  :: Bool
+, _write :: Bool
+, _exec  :: Bool
+} deriving (Show)
 
 -- | Show path except if `/etc/passwd`.
 -- Better as an Either, filename or "invalid file error".
@@ -23,8 +40,8 @@ noPasswd path
   | otherwise = return path
 
 -- | Show file content.
-showFile :: FilePath -> IO String
-showFile = noPasswd
+showContent :: FilePath -> IO String
+showContent = noPasswd
 
 -- | Make and read a file.
 -- Write and then read a file.
@@ -44,3 +61,23 @@ safeIO :: Int -> IO ()
 safeIO n
   | n > 0 && n < 100000 = mapM_ makeAndShow [1..n]
   | otherwise = error "Must be a positive number between 1 and 100,000."
+
+-- | Get file info.
+getFileInfo :: FilePath -> IO FileInfo
+getFileInfo filePath = do
+  perms <- Dir.getPermissions filePath
+  mtime <- Dir.getModificationTime filePath
+  size <- Dir.getFileSize filePath
+  return $ FileInfo {
+    _path = filePath
+  , _size = size
+  , _mtime = mtime
+  , _read = Dir.readable perms
+  , _write = Dir.writable perms
+  , _exec = Dir.executable perms
+  }
+
+
+-- | Helper function to convert UTCTime to ISO date string.
+showTime :: Clock.UTCTime -> String
+showTime = formatTime defaultTimeLocale "%Y-%m-%dT%T%Z"

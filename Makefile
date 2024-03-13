@@ -41,6 +41,7 @@ doc:
 
 .PHONY: setup
 setup:
+	@touch -d "2023-11-22T04:27:27UTC" LICENSE
 	@cabal update --only-dependencies
 
 .PHONY: clean

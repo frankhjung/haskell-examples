@@ -4,19 +4,26 @@ module ShowFileSpec
   ( spec
   ) where
 
-import           ShowFile                  (showFile)
+import           ShowFile                  (FileInfo (..), getFileInfo,
+                                            showContent, showTime)
 
 import           Test.Hspec                (Spec, describe, it, shouldBe)
 import           Test.Hspec.QuickCheck     (prop)
 import           Test.QuickCheck.Modifiers (NonEmptyList (NonEmpty))
 
-
 -- | Shows two different ways to test a function that uses IO.
 spec :: Spec
 spec = do
-  describe "showFile" $ do
-    it "showFile /etc/passwd" $ do
-      result <- showFile "/etc/passwd"
+  describe "showContent" $ do
+    it "showContent /etc/passwd" $ do
+      result <- showContent "/etc/passwd"
       result `shouldBe` "no passwd"
-    prop "showFile random_file" $ do
-      \(NonEmpty (x :: FilePath)) -> showFile x >>= (`shouldBe` x)
+    prop "showContent random_file" $ do
+      \(NonEmpty (x :: FilePath)) -> showContent x >>= (`shouldBe` x)
+    it "getFileInfo LICENSE" $ do
+      result <- getFileInfo "LICENSE" -- requires touch of file in pipeline
+      _size result `shouldBe` 35149
+      showTime (_mtime result) `shouldBe` "2023-11-22T04:27:27UTC"
+      _read result `shouldBe` True
+      _write result `shouldBe` True
+      _exec result `shouldBe` False

@@ -23,8 +23,10 @@ library
   default-extensions: OverloadedStrings
   build-depends:
     , base        ^>=4.17.2.0
+    , directory   ^>=1.3.7.1
     , fmt         ^>=0.6.3.0
     , QuickCheck
+    , time        ^>=1.12.2
 
   exposed-modules:
     Cards
@@ -39,7 +41,7 @@ library
     Strings
 
 test-suite test
-  hs-source-dirs:     test src
+  hs-source-dirs:     test
   main-is:            TestsSpec.hs
   default-language:   Haskell2010
   ghc-options:        -Wall -Wno-missing-home-modules
@@ -49,7 +51,7 @@ test-suite test
   build-depends:
     , base
     , Examples
-    , fmt
     , hspec           ^>=2.11.7
     , hspec-discover
     , QuickCheck      ^>=2.14.3
+    , time
