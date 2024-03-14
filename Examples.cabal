@@ -2,6 +2,7 @@ cabal-version:      2.4
 name:               Examples
 version:            0.1.0
 description:        Simple Haskell code examples and experiments.
+synopsis:           Haskell code examples
 homepage:           https://gitlab.com/frankhjung1/haskell-examples/
 bug-reports:        https://gitlab.com/frankhjung1/haskell-examples/issues
 license:            GPL-3.0-only
@@ -25,7 +26,7 @@ library
     , base        ^>=4.17.2.0
     , directory   ^>=1.3.7.1
     , fmt         ^>=0.6.3.0
-    , QuickCheck
+    , QuickCheck  ^>=2.14.3
     , time        ^>=1.12.2
 
   exposed-modules:
@@ -53,5 +54,5 @@ test-suite test
     , Examples
     , hspec           ^>=2.11.7
     , hspec-discover
-    , QuickCheck      ^>=2.14.3
+    , QuickCheck
     , time

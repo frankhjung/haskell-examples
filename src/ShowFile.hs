@@ -15,12 +15,13 @@ module ShowFile (
   , safeIO
   , getFileInfo
   , showTime
+  , parseTime
   -- * Types
   , FileInfo (..)
   ) where
 
 import qualified Data.Time.Clock  as Clock
-import           Data.Time.Format (defaultTimeLocale, formatTime)
+import           Data.Time.Format (defaultTimeLocale, formatTime, parseTimeM)
 import qualified System.Directory as Dir
 
 data FileInfo = FileInfo {
@@ -65,9 +66,9 @@ safeIO n
 -- | Get file info.
 getFileInfo :: FilePath -> IO FileInfo
 getFileInfo filePath = do
-  perms <- Dir.getPermissions filePath
-  mtime <- Dir.getModificationTime filePath
   size <- Dir.getFileSize filePath
+  mtime <- Dir.getModificationTime filePath
+  perms <- Dir.getPermissions filePath
   return $ FileInfo {
     _path = filePath
   , _size = size
@@ -77,7 +78,14 @@ getFileInfo filePath = do
   , _exec = Dir.executable perms
   }
 
-
 -- | Helper function to convert UTCTime to ISO date string.
 showTime :: Clock.UTCTime -> String
 showTime = formatTime defaultTimeLocale "%Y-%m-%dT%T%Z"
+
+-- | Helper function to convert ISO date string to UTCTime.
+--
+-- ISO date/time format string is "%Y-%m-%dT%T%Z"
+--
+-- Example: @"2023-11-22T04:27:27Z"@
+parseTime :: String -> Maybe Clock.UTCTime
+parseTime = parseTimeM True defaultTimeLocale "%Y-%m-%dT%T%Z"

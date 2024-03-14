@@ -26,6 +26,7 @@ tags:
 .PHONY: lint
 lint:
 	@hlint --cross --color $(SRCS)
+	@cabal check
 
 .PHONY: build
 build:	$(SRCS)

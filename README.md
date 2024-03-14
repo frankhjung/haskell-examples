@@ -1,6 +1,7 @@
 # Utilities
 
-A collection of code snippets and utilities.
+A collection of Haskell code snippets used to explore the language and key
+concepts.
 
 ## Build using Cabal
 
@@ -12,7 +13,8 @@ cabal build
 
 ## Lint using hlint
 
-Generate a report of hlint suggestions for a project:
+Generate a report of [hlint](https://github.com/ndmitchell/hlint) suggestions
+for a project:
 
 ```bash
 hlint --git --report
@@ -27,7 +29,7 @@ hlint --default > .hlint.yaml
 ## Manage Packages with Cabal
 
 This project is using [Cabal](https://cabal.readthedocs.io/en/stable/) to manage
-packages.  The following commands are useful:
+packages. The following commands are useful:
 
 ### Install Missing Packages
 
