@@ -8,7 +8,10 @@ License     : GPL-3.0-only
 -}
 
 module ShowFile (
-    noPasswd
+  -- * Types
+    FileInfo (..)
+  -- * Functions
+  , noPasswd
   , showContent
   , makeAndReadFile
   , makeAndShow
@@ -16,8 +19,6 @@ module ShowFile (
   , getFileInfo
   , showTime
   , parseTime
-  -- * Types
-  , FileInfo (..)
   ) where
 
 import qualified Data.Time.Clock  as Clock

@@ -3,12 +3,11 @@
 A collection of Haskell code snippets used to explore the language and key
 concepts.
 
-## Build using Cabal
-
-Build using Cabal with:
+The project contains a [Makefile](Makefile) to validate, build and test the
+project. The default make target will format, lint, build and test the project.
 
 ```bash
-cabal build
+make
 ```
 
 ## Lint using hlint
@@ -26,10 +25,11 @@ Generate a default `.hlint.yaml` file:
 hlint --default > .hlint.yaml
 ```
 
-## Manage Packages with Cabal
+## Build using Cabal
 
-This project is using [Cabal](https://cabal.readthedocs.io/en/stable/) to manage
-packages. The following commands are useful:
+The project uses [Cabal](https://cabal.readthedocs.io/en/stable/) to manage and
+build the project. See [Example.cabal](Example.cabal) for the specific packages
+used. The following commands are useful to maintain the project:
 
 ### Install Missing Packages
 
@@ -39,7 +39,7 @@ cabal install --overwrite-policy=always --lib <package-name>
 
 ### Package Versions
 
-Tested locally using GHC 9.4.6 and Cabal 3.6.2.0 with these packages
+Tested locally using GHC 9.4.8 and Cabal 3.10.2.1 with these packages
 [cabal.project.freeze](cabal.project.freeze)
 
 To update this file, run:
@@ -47,6 +47,11 @@ To update this file, run:
 ```bash
 cabal freeze
 ```
+
+## GHCup
+
+The project uses [GHCup](https://www.haskell.org/ghcup/) to manage and build the
+project.
 
 ## References
 

@@ -12,7 +12,11 @@ build:
     name: frankhjung/haskell:9.4.8
   script:
     - touch -d "2023-11-22T04:27:27UTC" LICENSE
-    - make setup build doc test
+    - make setup
+    - make check
+    - make build
+    - make doc
+    - make test
     - mv dist-newstyle/build/x86_64-linux/ghc-9.4.8/Examples-*/doc/html/Examples/ public
   artifacts:
     paths:
@@ -20,7 +24,8 @@ build:
   cache:
     key: ${CI_COMMIT_REF_NAME}
     paths:
-      - dist-newstyle/
+      - ~/.cabal/
+      - ~/.ghc/
 
 pages:
   stage: deploy
