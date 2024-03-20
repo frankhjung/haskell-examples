@@ -111,7 +111,9 @@ instance Redacted Secret where
 -- | Simpler way to implement Redacted instance for 'Secret'.
 -- Needs the `DeriveAnyClass` extension.
 -- Overrides Show instance to give a customised value.
-newtype UserName = UserName String deriving (Eq, Show, Redacted)
+newtype UserName = UserName String
+  deriving stock (Eq, Show)
+  deriving anyclass (Redacted)
 -- custom Show instance
 -- instance Show UserName where
 --   show (UserName user) = "UserName: " <> user

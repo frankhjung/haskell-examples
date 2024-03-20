@@ -28,8 +28,10 @@ hlint --default > .hlint.yaml
 ## Build using Cabal
 
 The project uses [Cabal](https://cabal.readthedocs.io/en/stable/) to manage and
-build the project. See [Example.cabal](Example.cabal) for the specific packages
-used. The following commands are useful to maintain the project:
+build the project. See the projects [Cabal](Examples.cabal) file for the
+specific packages used.
+
+The following commands are useful to maintain the project:
 
 ### Install Missing Packages
 
@@ -39,14 +41,22 @@ cabal install --overwrite-policy=always --lib <package-name>
 
 ### Package Versions
 
-Tested locally using GHC 9.4.8 and Cabal 3.10.2.1 with these packages
-[cabal.project.freeze](cabal.project.freeze)
-
+The package list is maintained in [cabal.project.freeze](cabal.project.freeze).
 To update this file, run:
 
 ```bash
 cabal freeze
 ```
+
+## GitLab Pipeline
+
+The [GitLab pipeline](.gitlab-ci.yml) is used to build and test the project.
+It uses:
+
+- a custom [Haskell Docker
+  image](https://hub.docker.com/repository/docker/frankhjung/haskell/general)
+  for builds
+- a local `.cabal` cache
 
 ## GHCup
 
@@ -55,9 +65,11 @@ project.
 
 ## References
 
-* [Cabal](https://cabal.readthedocs.io/en/stable/)
-* [GitLab pages](https://haskell-examples-frankhjung1-04123b730cc28cc94ba032d712dcf83c17.gitlab.io/)
-* [Haskell Cookbook](https://www.packtpub.com/product/haskell-cookbook/9781786461353)
-* [hlint](https://github.com/ndmitchell/hlint)
-* [Richard Eisenberg's Videos](https://richarde.dev/videos.html)
-* [TWEAG Video Playlists](https://www.youtube.com/@tweag/playlists)
+- [Cabal](https://cabal.readthedocs.io/en/stable/)
+- [Format Cabal Files](https://hackage.haskell.org/package/cabal-fmt)
+- [GitLab Pages](https://haskell-examples-frankhjung1-04123b730cc28cc94ba032d712dcf83c17.gitlab.io/)
+- [Haskell Cookbook](https://www.packtpub.com/product/haskell-cookbook/9781786461353)
+- [hlint](https://github.com/ndmitchell/hlint)
+- [Richard Eisenberg Videos](https://richarde.dev/videos.html)
+- [Stylish Haskell](https://github.com/haskell/stylish-haskell)
+- [TWEAG Videos](https://www.youtube.com/@tweag/playlists)

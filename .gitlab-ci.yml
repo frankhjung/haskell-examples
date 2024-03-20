@@ -9,34 +9,37 @@ build:
   except:
     - tags
   image:
-    name: frankhjung/haskell:9.4.8
+    name: frankhjung/haskell:${GHC_VERSION}
+  variables:
+    GHC_VERSION: 9.4.8
+    PROJECT: Examples
+    CABAL_DIR: ${CI_PROJECT_DIR}/.cabal
+    CABAL_CONFIG: ${CABAL_DIR}/config
+    DOC_DIR: dist-newstyle/build/x86_64-linux/ghc-${GHC_VERSION}/${PROJECT}-*/doc/html/${PROJECT}/
   script:
-    - touch -d "2023-11-22T04:27:27UTC" LICENSE
     - make setup
     - make check
     - make build
     - make doc
+    - mv ${DOC_DIR} public
     - make test
-    - mv dist-newstyle/build/x86_64-linux/ghc-9.4.8/Examples-*/doc/html/Examples/ public
   artifacts:
     paths:
       - public
   cache:
     key: ${CI_COMMIT_REF_NAME}
     paths:
-      - ~/.cabal/
-      - ~/.ghc/
+      - ${CABAL_DIR}
 
 pages:
   stage: deploy
-  dependencies:
-    - build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
   image: alpine:latest
   script:
-    - echo Publishing pages ...
+    - echo Publish pages ...
+  dependencies:
+    - build
   artifacts:
     paths:
       - public
-  only:
-    refs:
-      - main

@@ -39,7 +39,7 @@ instance Select [] where
 
 -- | 'Selector' type.
 newtype Selector (f :: Type -> Type) (a :: Type) = Selector (f a)
-  deriving (Show, Eq)
+  deriving stock (Eq, Show)
 
 -- | Semigroup instance for 'Selector'.
 instance (Select f) => Semigroup (Selector f a) where
@@ -51,5 +51,5 @@ instance (Select f) => Monoid (Selector f a) where
 
 -- | 'MyMaybe' and 'Selector Maybe a' are representationally equal to 'Maybe a'.
 newtype MyMaybe a = MyMaybe (Maybe a)
-  deriving (Show, Eq)
+  deriving stock (Eq, Show)
   deriving (Semigroup, Monoid) via (Selector Maybe a)

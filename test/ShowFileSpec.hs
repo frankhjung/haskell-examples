@@ -17,7 +17,7 @@ mtime = "2023-11-22T04:27:27UTC"
 
 -- | Shows two different ways to test a function that uses IO.
 spec :: Spec
-spec = do
+spec =
   describe "showContent" $ do
     it "showContent /etc/passwd" $ do
       result <- showContent "/etc/passwd"
