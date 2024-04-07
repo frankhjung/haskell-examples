@@ -21,6 +21,7 @@ module ShowFile (
   , parseTime
   ) where
 
+import           Control.Monad    ((<=<))
 import qualified Data.Time.Clock  as Clock
 import           Data.Time.Format (defaultTimeLocale, formatTime, parseTimeM)
 import qualified System.Directory as Dir
@@ -55,7 +56,7 @@ makeAndReadFile fnumber =
 -- | Make and show file helper function.
 -- Write and read a file.
 makeAndShow :: Int -> IO ()
-makeAndShow n = makeAndReadFile n >>= putStrLn
+makeAndShow = putStrLn <=< makeAndReadFile
 
 -- | Test writing and reading a number of files.
 -- Efficient sequencing of IO actions ensuring file handle is closed.
