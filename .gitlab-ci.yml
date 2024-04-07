@@ -34,7 +34,7 @@ build:
 pages:
   stage: deploy
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
   image: alpine:latest
   script:
     - echo Publish pages ...
