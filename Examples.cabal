@@ -31,6 +31,7 @@ library
 
   exposed-modules:
     Cards
+    Contravariant
     FuncType
     Greeting
     Months
