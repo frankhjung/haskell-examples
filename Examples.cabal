@@ -47,7 +47,10 @@ test-suite test
   main-is:            TestsSpec.hs
   default-language:   Haskell2010
   ghc-options:        -Wall -Wno-missing-home-modules
-  default-extensions: OverloadedStrings
+  default-extensions:
+    OverloadedStrings
+    ScopedTypeVariables
+
   type:               exitcode-stdio-1.0
   build-tool-depends: hspec-discover:hspec-discover
   build-depends:

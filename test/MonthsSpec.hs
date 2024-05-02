@@ -1,4 +1,3 @@
-{-# LANGUAGE ScopedTypeVariables #-}
 module MonthsSpec
   ( spec
   ) where

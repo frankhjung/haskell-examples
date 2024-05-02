@@ -1,5 +1,4 @@
 {-# LANGUAGE DisambiguateRecordFields #-}
-{-# LANGUAGE ScopedTypeVariables      #-}
 
 module GreetingSpec
   ( spec

@@ -1,5 +1,3 @@
-{-# LANGUAGE ScopedTypeVariables #-}
-
 module SingletonsSpec
   ( spec
   ) where

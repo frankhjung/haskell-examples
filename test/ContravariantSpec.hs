@@ -1,5 +1,3 @@
-{-# LANGUAGE ScopedTypeVariables #-}
-
 module ContravariantSpec
   ( spec
   ) where
