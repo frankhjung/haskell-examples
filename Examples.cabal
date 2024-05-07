@@ -36,6 +36,7 @@ library
     Greeting
     Months
     Nullable
+    PolyList
     RankNTypes
     Selector
     ShowFile
