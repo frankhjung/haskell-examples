@@ -5,6 +5,8 @@ Description : Types with functions as values.
 Copyright   : © Frank Jung, 2023
 License     : GPL-3.0-only
 
+== Defining data with functions
+
 Code based off
 <https://www.packtpub.com/product/haskell-cookbook/9781786461353 Haskell Cookbook by Yogesh Sajanikar, Chapter 3, Defining data with functions, page 83.>
 
