@@ -4,7 +4,6 @@
 {-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE GADTs                #-}
 {-# LANGUAGE ScopedTypeVariables  #-}
--- {-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE TypeFamilies         #-}
 {-# LANGUAGE TypeOperators        #-}
 {-# LANGUAGE UndecidableInstances #-}
@@ -17,6 +16,23 @@ License     : GPL-3.0-only
 
 From Thinking with Types, Sandy Maguire, 2021, section 5.3 Heterogeneous Types.
 
+== Source
+
+See <https://github.com/isovector/thinking-with-types Thinking with Types> for
+code and solutions to exercises.
+
+== Unable to Derive Functor for Hetereogeneous Lists
+
+Unfortunately, for your PolyList type, it's not possible to create a Functor
+instance because PolyList is indexed by a type-level list of types, and Functor
+requires a type constructor of kind @* -> *@, i.e., a type constructor that
+takes exactly one type argument.
+
+The PolyList type is a heterogeneous list that can contain values of different
+types, and the type of each value is encoded in the type of the list itself.
+This is fundamentally different from the concept of a Functor, which operates
+on homogeneous containers that contain values of a single type.
+
 -}
 
 module PolyList (
@@ -27,36 +43,34 @@ module PolyList (
   , pHead
 ) where
 
-import           Data.Kind (Type)
+import           Data.Kind (Constraint, Type)
 
+-- | A constraint that applies to all types in a list.
+type family All (c :: Type -> Constraint) (ts :: [Type]) :: Constraint where
+  All _ '[] = ()
+  All c (t : ts) = (c t, All c ts)
+
+-- | A list that contain polymorphic types.
 data PolyList (ts :: [Type]) where
-  Nil :: PolyList '[]
+  PNil :: PolyList '[]
   (:#) :: t -> PolyList ts -> PolyList (t ': ts)
 infixr 5 :#
 
-instance Eq (PolyList '[]) where
-  Nil == Nil = True
-
-instance (Eq t, Eq (PolyList ts)) => Eq (PolyList (t ': ts)) where
+instance All Eq ts => Eq (PolyList ts) where
+  PNil == PNil           = True
   (a :# as) == (b :# bs) = a == b && as == bs
 
-instance Ord (PolyList '[]) where
-  Nil `compare` Nil = EQ
+instance (All Eq ts, All Ord ts) => Ord (PolyList ts) where
+  PNil `compare` PNil         = EQ
+  compare (a :# as) (b :# bs) = compare a b  <> compare as bs
 
-instance (Ord t, Ord (PolyList ts)) => Ord (PolyList (t ': ts)) where
-  (a :# as) `compare` (b :# bs) = case compare a b of
-    EQ -> as `compare` bs
-    x  -> x
-
-instance Show (PolyList '[]) where
-  show Nil = "Nil"
-
-instance (Show t, Show (PolyList ts)) => Show (PolyList (t ': ts)) where
-    show (a :# as) = show a ++ " :# " ++ show as
+instance (All Show ts) => Show (PolyList ts) where
+  show PNil      = "PNil"
+  show (a :# as) = show a <> " :# " <> show as
 
 -- | Get the length of a polymorphic list.
 pLength :: PolyList ts -> Int
-pLength Nil       = 0
+pLength PNil      = 0
 pLength (_ :# ts) = 1 + pLength ts
 
 -- | Get the head of a polymorphic list.
