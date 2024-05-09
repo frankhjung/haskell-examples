@@ -1,12 +1,13 @@
-{-# LANGUAGE ConstraintKinds      #-}
-{-# LANGUAGE DataKinds            #-}
-{-# LANGUAGE FlexibleContexts     #-}
-{-# LANGUAGE FlexibleInstances    #-}
-{-# LANGUAGE GADTs                #-}
-{-# LANGUAGE ScopedTypeVariables  #-}
-{-# LANGUAGE TypeFamilies         #-}
-{-# LANGUAGE TypeOperators        #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE ConstraintKinds           #-}
+{-# LANGUAGE DataKinds                 #-}
+{-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE FlexibleContexts          #-}
+{-# LANGUAGE FlexibleInstances         #-}
+{-# LANGUAGE GADTs                     #-}
+{-# LANGUAGE ScopedTypeVariables       #-}
+{-# LANGUAGE TypeFamilies              #-}
+{-# LANGUAGE TypeOperators             #-}
+{-# LANGUAGE UndecidableInstances      #-}
 
 {-|
 Module      : PolyList
@@ -38,6 +39,7 @@ on homogeneous containers that contain values of a single type.
 module PolyList (
     -- * Types
     PolyList (..)
+  , HEntry (..)
     -- * Functions
   , pLength
   , pHead
@@ -76,3 +78,13 @@ pLength (_ :# ts) = 1 + pLength ts
 -- | Get the head of a polymorphic list.
 pHead :: PolyList (t ': ts) -> t
 pHead (t :# _) = t
+
+-- | An alternate implementation of a heterogenous item.
+-- The 'HEntry' type is an existential wrapper around a value of any type that
+-- has a 'Show' instance. This allows us to store values of different types in a
+-- list, but we can't derive 'Eq' or 'Ord' for 'HEntry' because the types are
+-- potentially different.
+data HEntry = forall a. Show a => HEntry a
+
+instance Show HEntry where
+  show (HEntry a) = show a

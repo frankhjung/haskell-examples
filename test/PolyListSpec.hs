@@ -5,8 +5,12 @@ module PolyListSpec (
     spec
   ) where
 
-import           PolyList   (PolyList (..), pHead, pLength)
+import           PolyList   (HEntry (..), PolyList (..), pHead, pLength)
 import           Test.Hspec (Spec, describe, it, shouldBe, shouldNotBe)
+
+-- | Get the 2nd element as a Boolean from a polymorphic list.
+getBool :: PolyList '[ _1, Bool, _2] -> Bool
+getBool (_ :# b :# _) = b
 
 plist :: PolyList '[Maybe String, Bool, Int]
 plist = Just "foo" :# True :# 42 :# PNil
@@ -14,8 +18,8 @@ plist = Just "foo" :# True :# 42 :# PNil
 plist' :: PolyList '[Maybe String, Bool, Int]
 plist' = Just "bar" :# False :# 41 :# PNil
 
-getBool :: PolyList '[_1, Bool, _2] -> Bool
-getBool (_ :# b :# _) = b
+hlist :: [HEntry]
+hlist = [HEntry (1 :: Int), HEntry ("hello" :: String), HEntry 'c']
 
 spec :: Spec
 spec =
@@ -38,3 +42,5 @@ spec =
       plist `compare` plist `shouldBe` EQ
     it "ord gt" $
       plist `compare` plist' `shouldBe` GT
+    it "length of HEntry list" $
+      length hlist `shouldBe` 3
