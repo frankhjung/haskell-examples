@@ -2,13 +2,15 @@
 {-# LANGUAGE RankNTypes                #-}
 
 {-|
+
 Module      : RankNTypes
 Description : Abstracting function types with RankNTypes.
 Copyright   : © Frank Jung, 2023
 License     : GPL-3.0-only
 
-Based on
-<https://subscription.packtpub.com/book/programming/9781783988723 Haskell Design Patterns by Ryan Lemmer, Chapter 5, Abstracting function types: RankNTypes, page 88.>
+Based on [Haskell Design Patterns by Ryan Lemmer, Chapter 5, Abstracting
+function types: RankNTypes, page
+88.](https://subscription.packtpub.com/book/programming/9781783988723)
 
 -}
 

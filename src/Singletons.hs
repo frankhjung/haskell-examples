@@ -15,8 +15,8 @@ This is from a talk by Richard Eisenberg about Generalized Abstract Data Types.
 Singletons are a useful work-around for dependent types in Haskell.
 Singletons can be used for:
 
-(1) /reflection
-2. /reification
+(1) /reflection/
+2. /reification/
 3. promoting function values to become functions on types
 4. /defunctionalization/ (turning functions into data)
 
@@ -27,16 +27,15 @@ type-checking. They are completely erased at runtime.
 
 == Resources
 
-From <https://www.youtube.com/@tweag Tweag YouTube channel> specifically
-<https://richarde.dev/2021/ Richard Eisenberg>'s
-<https://richarde.dev/videos.html series> on Haskell.
+From [Tweag YouTube channel](https://www.youtube.com/@tweag) specifically
+[Richard Eisenberg](https://richarde.dev/2021/)'s
+[series](https://richarde.dev/videos.html) on Haskell.
 
 See also:
 
 (1) <https://hackage.haskell.org/package/singletons-base singletons: Basic singleton types and definitions>
 2. <https://hackage.haskell.org/package/singletons singletons-base: A promoted and singled version of the base library>
-3. <https://richarde.dev/papers/2012/singletons/paper.pdf Dependently Typed
-   Programming with Singletons (PDF)>
+3. <https://richarde.dev/papers/2012/singletons/paper.pdf Dependently Typed Programming with Singletons (PDF)>
 4. <https://blog.jle.im/entry/introduction-to-singletons-1.html Introduction to Singletons by Justin Le>
 
 == Returning different types does not work

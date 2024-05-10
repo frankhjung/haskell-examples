@@ -6,7 +6,8 @@ Copyright   : © Frank Jung, 2024
 License     : GPL-3.0-only
 
 -}
-module Nullable (
+module Nullable
+  (
     Nullable (..)
   ) where
 

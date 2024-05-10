@@ -10,17 +10,20 @@
 {-# LANGUAGE UndecidableInstances      #-}
 
 {-|
+
 Module      : PolyList
 Description : Polymorhic list.
 Copyright   : © Frank Jung, 2024
 License     : GPL-3.0-only
 
-From Thinking with Types, Sandy Maguire, 2021, section 5.3 Heterogeneous Types.
+From [Thinking with
+Types](https://github.com/isovector/thinking-with-types), Sandy Maguire,
+2021, section 5.3 Heterogeneous Types.
 
 == Source
 
-See <https://github.com/isovector/thinking-with-types Thinking with Types> for
-code and solutions to exercises.
+See [Thinking with Types](https://github.com/isovector/thinking-with-types)
+for code and solutions to exercises.
 
 == Unable to Derive Functor for Hetereogeneous Lists
 

@@ -3,15 +3,16 @@
 {-# LANGUAGE ViewPatterns    #-}
 
 {-|
+
 Module      : Cards
 Description : Examples of pattern synonyms using playing cards.
 Copyright   : © Frank Jung, 2021-2023
 License     : GPL-3.0-only
 
-From Tweag YouTube channel
-<https://youtu.be/SPC_R5nwFqo Introduction to Pattern Synonyms>
-where Richard introduces GHC's feature of Pattern Synonyms, allowing programmers
-to abstract over a pattern.
+From Tweag YouTube channel [Introduction to Pattern
+Synonyms](https://youtu.be/SPC_R5nwFqo) where Richard introduces GHC's
+feature of Pattern Synonyms, allowing programmers to abstract over a
+pattern.
 
 -}
 

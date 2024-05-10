@@ -7,8 +7,9 @@ License     : GPL-3.0-only
 
 == Defining data with functions
 
-Code based off
-<https://www.packtpub.com/product/haskell-cookbook/9781786461353 Haskell Cookbook by Yogesh Sajanikar, Chapter 3, Defining data with functions, page 83.>
+Code based off [Haskell Cookbook by Yogesh Sajanikar, Chapter 3, Defining
+data with functions, page
+83.](https://www.packtpub.com/product/haskell-cookbook/9781786461353)
 
 Some use-cases for using functions as types:
 

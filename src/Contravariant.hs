@@ -4,10 +4,10 @@ Description : Explore contravariant functors.
 Copyright   : © Frank Jung, 2024
 License     : GPL-3.0-only
 
-From
-<https://www.schoolofhaskell.com/user/commercial/content/covariance-contravariance Covariance, contravariance, and positive and negative position>
-and
-<https://stackoverflow.com/questions/38034077/what-is-a-contravariant-functor What is a contravariant functor?>
+From [Covariance, contravariance, and positive and negative
+position](https://www.schoolofhaskell.com/user/commercial/content/covariance-contravariance)
+and [What is a contravariant
+functor?](https://stackoverflow.com/questions/38034077/what-is-a-contravariant-functor)
 
 The implementation of the function-result `fmap` and the function-argument
 `contramap` are almost exactly the same thing: just function composition
@@ -35,13 +35,14 @@ use a newtype wrapper to swap the type parameters and make that an instance
 
 -}
 
-module Contravariant (
+module Contravariant
+  (
     -- * Types
     MakeString (..)
     -- * Functions
   , plus3ShowInt
   , showInt
-) where
+  ) where
 
 import           Data.Functor.Contravariant (Contravariant (..))
 
