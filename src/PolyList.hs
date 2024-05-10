@@ -36,14 +36,15 @@ on homogeneous containers that contain values of a single type.
 
 -}
 
-module PolyList (
+module PolyList
+  (
     -- * Types
     PolyList (..)
   , HEntry (..)
     -- * Functions
   , pLength
   , pHead
-) where
+  ) where
 
 import           Data.Kind (Constraint, Type)
 
