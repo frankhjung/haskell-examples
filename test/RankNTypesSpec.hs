@@ -2,9 +2,12 @@
 
 module RankNTypesSpec(spec) where
 
-import           RankNTypes            (ShowBox (..), processTuple)
-import           Test.Hspec            (Spec, describe)
+import           RankNTypes            (ShowBox (..), applyToFive, id,
+                                        processTuple)
+import           Test.Hspec            (Spec, describe, it, shouldBe)
 import           Test.Hspec.QuickCheck (prop)
+
+import           Prelude               hiding (id)
 
 spec :: Spec
 spec = do
@@ -16,3 +19,6 @@ spec = do
   describe "ExistentialQuantification" $
     prop "ShowBox" $ \(i :: Int, xs :: String)
       -> map show [SB (), SB i, SB xs] == [show (), show i, show xs]
+  describe "applyToFive" $
+    it "applyToFive id" $
+      applyToFive id `shouldBe` 5

@@ -37,6 +37,8 @@ types, and the type of each value is encoded in the type of the list itself.
 This is fundamentally different from the concept of a Functor, which operates
 on homogeneous containers that contain values of a single type.
 
+See also "RankNTypes" for other examples.
+
 -}
 
 module PolyList
@@ -88,6 +90,8 @@ pHead (t :# _) = t
 -- has a 'Show' instance. This allows us to store values of different types in a
 -- list, but we can't derive 'Eq' or 'Ord' for 'HEntry' because the types are
 -- potentially different.
+--
+-- See also "RankNTypes" for other examples.
 data HEntry = forall a. Show a => HEntry a
 
 instance Show HEntry where
