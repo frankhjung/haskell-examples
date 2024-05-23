@@ -2,7 +2,8 @@
 
 module RankNTypesSpec(spec) where
 
-import           RankNTypes            (ShowBox (..), applyToFive, processTuple)
+import           RankNTypes            (HasShow (..), ShowBox (..), applyToFive,
+                                        elimHasShow, processTuple)
 import           Test.Hspec            (Spec, describe, it, shouldBe)
 import           Test.Hspec.QuickCheck (prop)
 
@@ -13,9 +14,10 @@ spec = do
       -> processTuple even (x, y) == (even x, even y)
     prop "processTuple odd" $ \(x :: Integer, y :: Word)
       -> processTuple odd (x, y) == (odd x, odd y)
-  describe "ExistentialQuantification" $
+    it "applyToFive id" $ applyToFive id `shouldBe` 5
+  describe "Existential Quantification" $
     prop "ShowBox" $ \(i :: Int, xs :: String)
       -> map show [SB (), SB i, SB xs] == [show (), show i, show xs]
-  describe "applyToFive" $
-    it "applyToFive id" $
-      applyToFive id `shouldBe` 5
+  describe "Existential Types and Eliminators" $
+    prop "HasShow" $ \(xs :: String)
+      -> elimHasShow show (HasShow xs) == show xs

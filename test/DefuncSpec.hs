@@ -14,5 +14,5 @@ spec = do
     prop "sum " $ \(xs :: [Int]) -> sum xs `shouldBe` Prelude.sum xs
     prop "add" $ \(n :: Int, xs :: [Int]) -> add n xs `shouldBe` map (+ n) xs
   describe "defunctionalization" $ do
-      prop "sum'" $ \(xs :: [Int]) -> sum' xs `shouldBe` sum xs
-      prop "add'" $ \(n :: Int, xs :: [Int]) -> add' n xs `shouldBe` add n xs
+    prop "sum'" $ \(xs :: [Int]) -> sum' xs `shouldBe` sum xs
+    prop "add'" $ \(n :: Int, xs :: [Int]) -> add' n xs `shouldBe` add n xs

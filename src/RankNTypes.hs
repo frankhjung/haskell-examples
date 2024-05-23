@@ -1,4 +1,5 @@
 {-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE GADTs                     #-}
 {-# LANGUAGE RankNTypes                #-}
 
 {-|
@@ -13,7 +14,7 @@ function types: RankNTypes, page
 88.](https://subscription.packtpub.com/book/programming/9781783988723).
 
 The 'applyToFive' example is from [Thinking In
-Types](https://leanpub.com/thinking-with-types) by Sandy Maguire.
+Types](https://thinkingwithtypes.com/) by Sandy Maguire.
 
 The /rank/ of a function is the "depth" of its polymorphism. Most of
 typical polymorphic functions in Haskell are of rank 1. e.g.:
@@ -35,9 +36,11 @@ module RankNTypes
   (
     -- * Types
     ShowBox (..)
+  , HasShow(..)
     -- * Functions
-  , processTuple
   , applyToFive
+  , elimHasShow
+  , processTuple
   ) where
 
 -- | Process tuple with polymorphic function for 'Integral' types.
@@ -65,7 +68,31 @@ instance Show ShowBox where
 -- @forall a.@ part needs to be inside the parentheses. This requires the
 -- @-XRankNTypes@ extension.
 --
--- This function is of rank 2 as it receives a rank 1 function as an argument
--- and runs it on the integer 5.
+-- This function is of rank 2 as it receives a function of rank 1 as an argument
+-- and runs it on the integer value 5.
 applyToFive :: (forall a. a -> a) -> Int
 applyToFive f = f 5
+
+-- | 'HasShow' type example.
+--
+-- See [Thinking with Types](https://thinkingwithtypes.com/), Section 7.1
+-- Existential Types and Eliminators
+data HasShow where
+  HasShow :: Show a => a -> HasShow
+
+-- | Show instance for 'HasShow'.
+--
+-- Same as:
+--
+-- @
+-- instance Show HasShow where
+--   show (HasShow a) = show a
+-- @
+instance Show HasShow where
+  show = elimHasShow show
+
+-- | Eliminator for 'HasShow'.
+--
+-- Reads value of 'HasShow' type.
+elimHasShow :: (forall a. Show a => a -> r) -> HasShow -> r
+elimHasShow f (HasShow a) = f a
