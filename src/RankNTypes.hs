@@ -37,11 +37,8 @@ module RankNTypes
     ShowBox (..)
     -- * Functions
   , processTuple
-  , id
   , applyToFive
   ) where
-
-import           Prelude hiding (id)
 
 -- | Process tuple with polymorphic function for 'Integral' types.
 processTuple :: (Integral a1, Integral a2) => (forall a. Integral a => a -> Bool) -> (a1, a2) -> (Bool, Bool)
@@ -63,10 +60,6 @@ data ShowBox = forall s. Show s => SB s
 -- | Show instance for 'ShowBox'.
 instance Show ShowBox where
   show (SB s) = show s
-
--- | Custom identity function.
-id :: forall a. a -> a
-id x = x
 
 -- | Due to Haskell's implicit quantification of type variables, the
 -- @forall a.@ part needs to be inside the parentheses. This requires the

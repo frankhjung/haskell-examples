@@ -2,12 +2,9 @@
 
 module RankNTypesSpec(spec) where
 
-import           RankNTypes            (ShowBox (..), applyToFive, id,
-                                        processTuple)
+import           RankNTypes            (ShowBox (..), applyToFive, processTuple)
 import           Test.Hspec            (Spec, describe, it, shouldBe)
 import           Test.Hspec.QuickCheck (prop)
-
-import           Prelude               hiding (id)
 
 spec :: Spec
 spec = do
