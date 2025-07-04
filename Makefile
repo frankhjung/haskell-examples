@@ -2,7 +2,7 @@
 
 .DEFAULT_GOAL	:= default
 
-CABAL	:= Examples.cabal
+TARGET	:= Examples
 SRCS	:= $(wildcard */*.hs)
 
 .PHONY: default
@@ -14,7 +14,7 @@ all:	format check build test doc
 .PHONY: format
 format:	$(SRCS)
 	@echo format ...
-	@cabal-fmt --inplace $(CABAL)
+	@cabal-fmt --inplace $(TARGET).cabal
 	@stylish-haskell --inplace $(SRCS)
 
 .PHONY: check
@@ -33,12 +33,10 @@ lint:	$(SRCS)
 
 .PHONY: build
 build:  $(SRCS)
-	@echo build ...
 	@cabal build
 
 .PHONY: test
 test:
-	@echo test ...
 	@cabal test --test-show-details=direct
 
 .PHONY: doc
