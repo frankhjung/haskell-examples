@@ -10,6 +10,14 @@ project. The default make target will format, lint, build and test the project.
 make
 ```
 
+## GHCi
+
+To start GHCi with packages from the project, run:
+
+```bash
+cabal repl
+```
+
 ## Lint using hlint
 
 Generate a report of [hlint](https://github.com/ndmitchell/hlint) suggestions

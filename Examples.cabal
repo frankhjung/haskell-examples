@@ -23,10 +23,12 @@ library
   ghc-options:        -Wall
   default-extensions: OverloadedStrings
   build-depends:
+    , array       ^>=0.5
     , base        ^>=4.18
     , directory   ^>=1.3
-    , fmt         ^>=0.6.3
+    , fmt         ^>=0.6
     , free        ^>=5.2
+    , groups      ^>=0.5
     , QuickCheck  ^>=2.14
     , time        ^>=1.12
 
@@ -40,6 +42,7 @@ library
     MyFreeMonad
     Nullable
     PolyList
+    PrefixSums
     RankNTypes
     Selector
     ShowFile
@@ -58,6 +61,7 @@ test-suite test
   type:               exitcode-stdio-1.0
   build-tool-depends: hspec-discover:hspec-discover
   build-depends:
+    , array           ^>=0.5
     , base            ^>=4.18
     , Examples
     , hspec           ^>=2.11
