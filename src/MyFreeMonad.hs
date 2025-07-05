@@ -2,6 +2,24 @@
 {-# LANGUAGE DerivingStrategies   #-}
 {-# LANGUAGE UndecidableInstances #-}
 
+{-|
+
+Module      : MyFreeMonad
+Description : Test free monad.
+
+Free monads in Haskell are a powerful abstraction that allows for the
+creation of monadic structures without imposing additional constraints
+beyond those required by the monad definition. They are "free" in the sense
+that they are unrestricted, meaning they do not add any extra laws or
+structure beyond what is necessary for a monad.
+
+A free monad satisfies all the Monad laws, but does not do any computation.
+It just builds up a nested series of contexts. The user who creates such a
+free monadic value is responsible for doing something with those nested
+contexts, so that the meaning of such a composition can be deferred until
+after the monadic value has been created.
+
+-}
 module MyFreeMonad ( ArithM
                    , ArithF (..)
                    , addA
