@@ -15,10 +15,12 @@ module PrefixSumsSpec (
     spec
   ) where
 
-import           Data.Array  (Array, listArray)
-import           Data.Monoid (Sum (..))
-import           PrefixSums  (prefix, range)
-import           Test.Hspec  (Spec, describe, it, shouldBe)
+import           Control.Exception (evaluate)
+import           Data.Array        (Array, listArray)
+import           Data.Monoid       (Sum (..))
+import           PrefixSums        (prefix, range)
+import           Test.Hspec        (Spec, describe, errorCall, it, shouldBe,
+                                    shouldThrow)
 
 -- Test prefix sums
 prefixSum :: Array Int (Sum Int)
@@ -39,5 +41,7 @@ spec =
       range prefixSum 1 4 `shouldBe` Sum 10   -- sums: 1, 2, 3, 4
     it "computes the range sums for a single element" $
       range prefixSum 2 2 `shouldBe` Sum 2    -- sums: 2
-    it "computes the range sums for an empty range" $
-      range prefixSum 1 0 `shouldBe` Sum 0    -- sums: 0
+    it "invalid i indices throws an error" $
+      evaluate (range prefixSum 0 2) `shouldThrow` errorCall "range: invalid indices"
+    it "invalid j indices throws an error" $
+      evaluate (range prefixSum 1 5) `shouldThrow` errorCall "range: invalid indices"

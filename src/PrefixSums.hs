@@ -46,7 +46,7 @@ module PrefixSums
   , range
   ) where
 
-import           Data.Array (Array, listArray, (!))
+import           Data.Array (Array, bounds, listArray, (!))
 import           Data.Group (Group (..), invert)
 import           Data.List  (scanl')
 
@@ -62,4 +62,6 @@ range :: Group a => Array Int a -- ^ array of Prefix Sums
                       -> Int    -- ^ (i) index of the first element (1 indexed)
                       -> Int    -- ^ (j) index of the last element
                       -> a      -- ^ the sum of the range [i, j]
-range p i j = p!j <> invert (p!(i-1))
+range p i j
+    | i < 1 || j < i || j > snd (bounds p) = error "range: invalid indices"
+    | otherwise                             = p!j <> invert (p!(i-1))
