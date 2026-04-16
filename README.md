@@ -1,75 +1,144 @@
-# Utilities
+# Examples
 
-A collection of Haskell code snippets used to explore the language and key
-concepts.
+A collection of small Haskell modules that explore core language features,
+type-level programming, algebraic abstractions, property testing, and basic IO.
+The package is a library of examples under `src/` with a matching test suite
+under `test/`. There is no executable target in the Cabal file.
 
-The project contains a [Makefile](Makefile) to validate, build and test the
-project. The default make target will format, lint, build and test the project.
+## Project Layout
+
+- `src/` contains the example modules exposed by the library in
+  [Examples.cabal](Examples.cabal).
+- `test/` contains one spec module per source module plus `TestsSpec.hs` for
+  Hspec discovery.
+- [Makefile](Makefile) provides formatting, linting, build, test, and Haddock
+  targets.
+
+## Build And Test
+
+The default Make target formats, lint-checks, builds, and tests the project.
 
 ```bash
 make
 ```
 
-## GHCi
-
-To start GHCi with packages from the project, run:
+Useful commands:
 
 ```bash
+cabal build
+cabal test --test-show-details=direct
 cabal repl
 ```
 
-## Lint using hlint
-
-Generate a report of [hlint](https://github.com/ndmitchell/hlint) suggestions
-for a project:
+To build documentation:
 
 ```bash
-hlint --git --report
+make doc
 ```
 
-Generate a default `.hlint.yaml` file:
+## Tooling Notes
 
-```bash
-hlint --default > .hlint.yaml
-```
+- The project uses [Cabal](https://cabal.readthedocs.io/en/stable/) for builds.
+- [GHCup](https://www.haskell.org/ghcup/) is the intended toolchain manager.
+- The pinned dependency set lives in
+  [cabal.project.freeze](cabal.project.freeze).
+- The CI pipeline is defined in [.gitlab-ci.yml](.gitlab-ci.yml).
 
-## Build using Cabal
+## Module Guide
 
-The project uses [Cabal](https://cabal.readthedocs.io/en/stable/) to manage and
-build the project. See the projects [Cabal](Examples.cabal) file for the
-specific packages used.
+### [src/Cards.hs](src/Cards.hs)
 
-The following commands are useful to maintain the project:
+Demonstrates pattern synonyms over a simple playing-card domain. The module uses
+custom pattern constructors such as honor cards to make pattern matching clearer
+while still preserving exhaustiveness checking.
 
-### Install Missing Packages
+### [src/Contravariant.hs](src/Contravariant.hs)
 
-```bash
-cabal install --overwrite-policy=always --lib <package-name>
-```
+Explores contravariant functors through a wrapper that turns values into
+strings. Its main purpose is to contrast `contramap` with ordinary covariant
+mapping and show how function composition reverses direction.
 
-### Package Versions
+### [src/Defunc.hs](src/Defunc.hs)
 
-The package list is maintained in [cabal.project.freeze](cabal.project.freeze).
-To update this file, run:
+Shows defunctionalization with a GADT that represents operations as data. This
+turns higher-order behavior into a first-order structure that can be interpreted
+explicitly.
 
-```bash
-cabal freeze
-```
+### [src/FuncType.hs](src/FuncType.hs)
 
-## GitLab Pipeline
+Presents functions as first-class values wrapped in a custom type. The example
+focuses on storing, composing, and applying functions through a small API.
 
-The [GitLab pipeline](.gitlab-ci.yml) is used to build and test the project.
-It uses:
+### [src/Greeting.hs](src/Greeting.hs)
 
-- a custom [Haskell Docker
-  image](https://hub.docker.com/repository/docker/frankhjung/haskell/general)
-  for builds
-- a local `.cabal` cache
+Collects several everyday Haskell patterns in one place: record syntax,
+newtypes, derived instances, and type classes with default methods. It is a
+general language-features example rather than a single algorithm.
 
-## GHCup
+### [src/Months.hs](src/Months.hs)
 
-The project uses [GHCup](https://www.haskell.org/ghcup/) to manage and build the
-project.
+Defines a cyclic enumeration for months with wraparound predecessor and
+successor operations. It also includes QuickCheck support so the cyclic laws can
+be tested directly.
+
+### [src/MyFreeMonad.hs](src/MyFreeMonad.hs)
+
+Builds a small arithmetic DSL with the free monad. The point of the module is to
+separate the description of computations from the interpreter that evaluates
+them.
+
+### [src/Nullable.hs](src/Nullable.hs)
+
+Introduces a small type class for values that can be considered empty or null.
+The examples show the same interface applied to different container-like types.
+
+### [src/PolyList.hs](src/PolyList.hs)
+
+Implements a heterogeneous list indexed by a type-level list. This module is a
+type-system example focused on GADTs, `DataKinds`, and related extensions for
+statically tracking element types.
+
+### [src/PrefixSums.hs](src/PrefixSums.hs)
+
+Implements prefix sums for efficient range queries after a preprocessing step.
+The module is both an algorithm example and a property-testing example built on
+monoids and QuickCheck.
+
+### [src/RankNTypes.hs](src/RankNTypes.hs)
+
+Demonstrates higher-rank polymorphism and existential-style packaging. It shows
+how to work with values whose concrete types are hidden behind shared
+capabilities such as `Show`.
+
+### [src/Selector.hs](src/Selector.hs)
+
+Explores higher-kinded types and generic selection behavior through a `Select`
+type class. It also demonstrates deriving behavior for custom types via type
+class structure.
+
+### [src/ShowFile.hs](src/ShowFile.hs)
+
+Provides the main IO-focused examples in the project. It covers reading and
+writing files, inspecting file metadata, and working with time values from the
+filesystem.
+
+### [src/Singletons.hs](src/Singletons.hs)
+
+Demonstrates singleton types and the connection between type-level and
+value-level information. The module uses GADTs and promoted data to move more
+checks to compile time.
+
+### [src/Strings.hs](src/Strings.hs)
+
+Contains a minimal string-oriented example based on a `newtype` wrapper and a
+small text-processing helper. It serves as a compact demonstration of deriving
+instances and simple list-based string manipulation.
+
+## Tests
+
+The test suite mirrors the source tree with one spec per module. Most examples
+are pure library code; [src/ShowFile.hs](src/ShowFile.hs) is the main module
+that exercises filesystem IO.
 
 ## References
 
