@@ -14,7 +14,7 @@ under `test/`. There is no executable target in the Cabal file.
 - [Makefile](Makefile) provides formatting, linting, build, test, and Haddock
   targets.
 
-## Build And Test
+## Build Project
 
 The default Make target formats, lint-checks, builds, and tests the project.
 
@@ -22,12 +22,21 @@ The default Make target formats, lint-checks, builds, and tests the project.
 make
 ```
 
-Useful commands:
+Build using Cabal :
 
 ```bash
 cabal build
 cabal test --test-show-details=direct
 cabal repl
+```
+
+Build using Stack:
+
+```bash
+stack clean
+stack build --pedantic --no-run-tests
+stack test --coverage
+stack haddock --no-haddock-deps --haddock-hyperlink-source
 ```
 
 To build documentation:
@@ -38,11 +47,15 @@ make doc
 
 ## Tooling Notes
 
-- The project uses [Cabal](https://cabal.readthedocs.io/en/stable/) for builds.
+- The project supports both [Cabal](https://cabal.readthedocs.io/en/stable/) and
+  [Stack](https://docs.haskellstack.org/en/stable/) builds.
 - [GHCup](https://www.haskell.org/ghcup/) is the intended toolchain manager.
 - The pinned dependency set lives in
   [cabal.project.freeze](cabal.project.freeze).
-- The CI pipeline is defined in [.gitlab-ci.yml](.gitlab-ci.yml).
+- Stack uses the Stackage snapshot pinned in [stack.yaml](stack.yaml).
+- CI pipelines are defined in
+  [.github/workflows/cicd.yml](.github/workflows/cicd.yml) and
+  [.gitlab-ci.yml](.gitlab-ci.yml).
 
 ## Module Guide
 

@@ -1,0 +1,6 @@
+resolver: lts-22.44
+
+packages:
+  - .
+ghc-options:
+  $locals: ""
