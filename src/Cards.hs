@@ -5,7 +5,7 @@
 {-|
 
 Module      : Cards
-Description : Examples of pattern synonyms using playing cards.
+Description : A pattern synonyms example using playing cards.
 Copyright   : © Frank Jung, 2021-2023
 License     : GPL-3.0-only
 

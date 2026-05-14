@@ -6,7 +6,7 @@
 {-|
 
 Module      : Singletons
-Description : Examples of the singleton data type.
+Description : Singleton data type example.
 Copyright   : © Frank Jung, 2023
 License     : GPL-3.0-only
 

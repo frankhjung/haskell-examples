@@ -1,4 +1,4 @@
-# Examples
+# Haskell Examples
 
 A collection of small Haskell modules that explore core language features,
 type-level programming, algebraic abstractions, property testing, and basic IO.
@@ -8,7 +8,7 @@ under `test/`. There is no executable target in the Cabal file.
 ## Project Layout
 
 - `src/` contains the example modules exposed by the library in
-  [Examples.cabal](Examples.cabal).
+  [examples.cabal](examples.cabal).
 - `test/` contains one spec module per source module plus `TestsSpec.hs` for
   Hspec discovery.
 - [Makefile](Makefile) provides formatting, linting, build, test, and Haddock

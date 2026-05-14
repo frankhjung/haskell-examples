@@ -5,7 +5,7 @@
 {-|
 
 Module      : MyFreeMonad
-Description : Test free monad.
+Description : A simple arithmetic language implemented using a free monad.
 
 Free monads in Haskell are a powerful abstraction that allows for the
 creation of monadic structures without imposing additional constraints
@@ -18,6 +18,11 @@ It just builds up a nested series of contexts. The user who creates such a
 free monadic value is responsible for doing something with those nested
 contexts, so that the meaning of such a composition can be deferred until
 after the monadic value has been created.
+
+Example usage:
+
+>>> evalArith (example 0)
+5
 
 -}
 module MyFreeMonad ( ArithM
@@ -33,13 +38,24 @@ module MyFreeMonad ( ArithM
 
 import           Control.Monad.Free (Free (..), liftF)
 
--- | The functor for the arithmetic language.
-data ArithF x = Add Int x | Sub Int x | Mul Int x | Div Int x deriving (Show, Functor)
+-- | The functor for the arithmetic language, defining the supported operations.
+data ArithF x
+  = Add Int x -- ^ Addition operation
+  | Sub Int x -- ^ Subtraction operation
+  | Mul Int x -- ^ Multiplication operation
+  | Div Int x -- ^ Division operation
+  deriving (Show, Functor)
 
--- | The free monad for the arithmetic language.
+-- | The free monad for the arithmetic language, built over the 'ArithF' functor.
 type ArithM = Free ArithF
 
 -- | Evaluate an arithmetic expression.
+--
+-- >>> evalArith (Pure 10)
+-- 10
+--
+-- >>> evalArith (example 1)
+-- 6
 evalArith :: Free ArithF Int -> Int
 evalArith (Free (Add x n)) = evalArith n + x
 evalArith (Free (Sub x n)) = evalArith n - x
@@ -47,19 +63,26 @@ evalArith (Free (Mul x n)) = evalArith n * x
 evalArith (Free (Div x n)) = evalArith n `div` x
 evalArith (Pure x)         = x
 
+-- | Lift an addition operation into the 'ArithM' monad.
 addA :: Int -> ArithM ()
 addA x = liftF (Add x ())
 
+-- | Lift a subtraction operation into the 'ArithM' monad.
 subA :: Int -> ArithM ()
 subA x = liftF (Sub x ())
 
+-- | Lift a multiplication operation into the 'ArithM' monad.
 mulA :: Int -> ArithM ()
 mulA x = liftF (Mul x ())
 
+-- | Lift a division operation into the 'ArithM' monad.
 divA :: Int -> ArithM ()
 divA x = liftF (Div x ())
 
--- @evalArith (example 0) == 5@         # ((((0+10)*2)-10)/2) == 5
+-- | An example arithmetic computation.
+--
+-- >>> evalArith (example 0)
+-- 5
 example :: Int -> ArithM Int
 example n =
     divA 2
@@ -68,7 +91,10 @@ example n =
     >> addA 10
     >> return n
 
--- @evalArith (exampleDo 1) == 6@       # ((((1+10)*2)-10)/2) == 6
+-- | An example arithmetic computation using do-notation.
+--
+-- >>> evalArith (exampleDo 1)
+-- 6
 exampleDo :: Int -> ArithM Int
 exampleDo n = do
   divA 2

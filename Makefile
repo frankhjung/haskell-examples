@@ -2,7 +2,7 @@
 
 .DEFAULT_GOAL	:= default
 
-TARGET	:= Examples
+TARGET	:= examples
 SRCS	:= $(wildcard */*.hs)
 
 .PHONY: help

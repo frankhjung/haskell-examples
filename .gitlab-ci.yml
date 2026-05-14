@@ -12,7 +12,7 @@ build:
     name: frankhjung/haskell:${GHC_VERSION}
   variables:
     GHC_VERSION: 9.6.7
-    PROJECT: Examples
+    PROJECT: examples
     CABAL_DIR: ${CI_PROJECT_DIR}/.cabal
     CABAL_CONFIG: ${CABAL_DIR}/config
     DOC_DIR: dist-newstyle/build/x86_64-linux/ghc-${GHC_VERSION}/${PROJECT}-*/doc/html/${PROJECT}/
